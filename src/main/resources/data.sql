@@ -1,0 +1,10 @@
+INSERT INTO merchandise(name,category,price,stock)VALUES("肉","食品",500,10);
+INSERT INTO merchandise(name,category,price,stock)VALUES("お菓子","食品",100,5);
+INSERT INTO merchandise(name,category,price,stock)VALUES("食器洗い用洗剤","薬剤",800,20);
+INSERT INTO merchandise(name,category,price,stock)VALUES("ハンドソープ","薬剤",300,8);
+INSERT INTO merchandise(name,category,price,stock)VALUES("バーボン","お酒",2000,30);
+INSERT INTO merchandise(name,category,price,stock)VALUES("ボンベイ","お酒",2500,21);
+INSERT INTO merchandise(name,category,price,stock)VALUES("鉛筆","文房具",200,100);
+INSERT INTO merchandise(name,category,price,stock)VALUES("ノート","文房具",400,60);
+INSERT INTO merchandise(name,category,price,stock)VALUES("電球","家電",900,78);
+INSERT INTO merchandise(name,category,price,stock)VALUES("電池","家電",1100,87);
