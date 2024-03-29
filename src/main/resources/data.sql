@@ -8,3 +8,4 @@ INSERT INTO merchandise(name,category,price,stock)VALUES("鉛筆","文房具",20
 INSERT INTO merchandise(name,category,price,stock)VALUES("ノート","文房具",400,60);
 INSERT INTO merchandise(name,category,price,stock)VALUES("電球","家電",900,78);
 INSERT INTO merchandise(name,category,price,stock)VALUES("電池","家電",1100,87);
+INSERT INTO merchandise(name,category,price,stock)VALUES("インク","家電",5000,21);
