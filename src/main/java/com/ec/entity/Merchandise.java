@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="merchandise")
-public class merchandise {
+public class Merchandise {
 
     public static enum Category{
         食品,薬剤,お酒,文房具,家電
