@@ -16,4 +16,8 @@ public class MerchandiseService {
     public List<Merchandise> getMerchandisereList(){
         return merchandiseRepository.findAll();
     }
+
+    public List<Merchandise> getCategoryList(String category){
+        return merchandiseRepository.findByCategory(category);
+    }
 }

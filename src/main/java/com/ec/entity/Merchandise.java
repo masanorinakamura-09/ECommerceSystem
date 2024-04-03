@@ -15,9 +15,7 @@ import lombok.Data;
 @Table(name="merchandise")
 public class Merchandise {
 
-    public static enum Category{
-        食品,薬剤,お酒,文房具,家電
-    }
+
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -26,8 +24,8 @@ public class Merchandise {
     @Column(length=30,nullable=false)
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    private Category category;
+
+    private String category;
 
     private Integer price;
 
