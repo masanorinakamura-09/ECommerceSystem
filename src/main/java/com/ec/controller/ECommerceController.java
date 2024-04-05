@@ -3,8 +3,10 @@ package com.ec.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ec.entity.Merchandise;
 import com.ec.service.MerchandiseService;
 
 import jakarta.persistence.EnumType;
@@ -18,9 +20,6 @@ public class ECommerceController {
         this.service = service;
     }
 
-    public enum Category{
-        food;
-    }
 
     @GetMapping("/home")
     public String getList(Model model) {
@@ -58,6 +57,9 @@ public class ECommerceController {
         model.addAttribute("merchandiselist",service.getCategoryList("家電"));
         return "ECommerce/home";
     }
+
+
+
 }
 
 
