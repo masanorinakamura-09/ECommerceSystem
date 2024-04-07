@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ec.entity.Basketdetail;
+import com.ec.entity.Customer;
 import com.ec.entity.Merchandise;
 import com.ec.service.BasketdetailService;
 import com.ec.service.CustomerService;
@@ -27,11 +28,27 @@ public class BasketController {
     }
 
     @PostMapping("/add/{id}/")
-    public String AddMerchandise(@PathVariable("id") Integer id,
+    public String UpdateMerchandise(@PathVariable("id") Integer id,
             @RequestParam("qty") Integer qty) {
+            Customer customer=customerservice.getCustomer(1);
+            Merchandise merchandise=merchandiseservice.getMerchandise(id);
+
+            if(!basketdetailservice.Exists(merchandise, customer)) {
+                AddMerchandise(customer,merchandise,qty);
+            }
+
+            Basketdetail basketdetail=basketdetailservice.findBasketDetail(merchandise, customer);
+            basketdetail.setQty(basketdetail.getQty()+qty);
+
+            basketdetailservice.saveBasketdetail(basketdetail);
+            return "redirect:/sampleEC/home";
+    }
+
+    public String AddMerchandise(Customer customer,Merchandise merchandise,
+            Integer qty) {
             Basketdetail basketdetail=new Basketdetail();
-            basketdetail.setCustomer(customerservice.getCustomer(1));
-            basketdetail.setMerchandise(merchandiseservice.getMerchandise(id));
+            basketdetail.setCustomer(customer);
+            basketdetail.setMerchandise(merchandise);
             basketdetail.setQty(qty);
 
             basketdetailservice.saveBasketdetail(basketdetail);

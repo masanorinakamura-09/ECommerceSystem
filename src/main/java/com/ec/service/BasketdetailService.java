@@ -3,6 +3,8 @@ package com.ec.service;
 import org.springframework.stereotype.Service;
 
 import com.ec.entity.Basketdetail;
+import com.ec.entity.Customer;
+import com.ec.entity.Merchandise;
 import com.ec.repository.BasketdetailRepository;
 
 import jakarta.transaction.Transactional;
@@ -20,5 +22,13 @@ public class BasketdetailService {
     @Transactional
     public void saveBasketdetail(Basketdetail basketdetail) {
         basketdetailRepository.save(basketdetail);
+    }
+
+    public boolean Exists(Merchandise merchandise,Customer customer) {
+        return basketdetailRepository.existsByMerchandiseIdAndCustomerId(merchandise.getId(),customer.getId());
+    }
+
+    public Basketdetail findBasketDetail(Merchandise merchandise,Customer customer) {
+        return basketdetailRepository.findByMerchandiseIdAndCustomerId(merchandise.getId(),customer.getId());
     }
 }

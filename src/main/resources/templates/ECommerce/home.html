@@ -13,6 +13,8 @@
         <th>商品名</th>
         <th>カテゴリ</th>
         <th>価格</th>
+        <th>個数</th>
+        <th>カートに入れる</th>
     <tr th:each="data : ${merchandiselist}">
         <td th:text="${data.name}"></td>
         <td th:text="${data.category}"></td>
