@@ -17,10 +17,15 @@
         <td th:text="${data.name}"></td>
         <td th:text="${data.category}"></td>
         <td th:text="${data.price}"></td>
-        <td>
-        <form method="post" th:action="@{/basket/add}" th:object="${merchandise}">
-        <input type=submit value="カートに入れる">
-        </td>
+
+        <form method="post" th:action="@{/basket/add/{id}/(id=${data.id})}"  >
+        <td><select th:name="qty">
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        </select></td>
+        <td><input type=submit value="カートに入れる"></td>
+        </form>
 
     </tr>
     </table>

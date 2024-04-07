@@ -13,4 +13,3 @@ INSERT INTO merchandise(name,category,price,stock)VALUES("インク","家電",50
 INSERT INTO customer(age,name,post_code,telephone_number,address,email,prefectural,gender)
 VALUES(30,"吉田",8886666,0800909,"郡山市朝霞町111","emailaddress","福島県","男性");
 
-INSERT INTO basket(customer_id)VALUES(1);

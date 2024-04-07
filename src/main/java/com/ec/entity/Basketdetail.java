@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -21,8 +22,8 @@ public class Basketdetail {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name="basket_id",referencedColumnName="id",nullable=false)
-    private Basket basket;
+    @JoinColumn(name="customer_id",referencedColumnName="id",nullable=false)
+    private Customer customer;
 
     @OneToOne
     @JoinColumn(name="merchandise_id",referencedColumnName="id",nullable=false)

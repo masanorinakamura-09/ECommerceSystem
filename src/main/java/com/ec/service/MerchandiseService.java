@@ -20,4 +20,8 @@ public class MerchandiseService {
     public List<Merchandise> getCategoryList(String category){
         return merchandiseRepository.findByCategory(category);
     }
+
+    public Merchandise getMerchandise(Integer id) {
+        return merchandiseRepository.findById(id).get();
+    }
 }
