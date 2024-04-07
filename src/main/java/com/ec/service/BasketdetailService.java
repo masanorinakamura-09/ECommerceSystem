@@ -1,5 +1,7 @@
 package com.ec.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.ec.entity.Basketdetail;
@@ -30,5 +32,9 @@ public class BasketdetailService {
 
     public Basketdetail findBasketDetail(Merchandise merchandise,Customer customer) {
         return basketdetailRepository.findByMerchandiseIdAndCustomerId(merchandise.getId(),customer.getId());
+    }
+
+    public List<Basketdetail> getBasketList(Integer id){
+        return basketdetailRepository.findByCustomerId(id);
     }
 }
