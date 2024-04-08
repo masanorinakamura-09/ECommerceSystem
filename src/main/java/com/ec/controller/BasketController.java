@@ -1,5 +1,7 @@
 package com.ec.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,9 +33,15 @@ public class BasketController {
     }
 
     @GetMapping("/{id}/")
-    public String getBasket(@PathVariable("id") Integer id,Model model) {
+    public String getBasket(@PathVariable("id") Integer id,Model model,Model payment) {
 
-        model.addAttribute("merchandiselist",basketdetailservice.getBasketList(id));
+        List<Basketdetail> basketlist=basketdetailservice.getBasketList(id);
+        model.addAttribute("merchandiselist",basketlist);
+        var sum=0;
+        for(Basketdetail item:basketlist){
+            sum+=item.getMerchandise().getPrice()*item.getQty();
+        }
+        payment.addAttribute("payment",sum);
         return "ECommerce/basket";
     }
 
@@ -44,7 +52,7 @@ public class BasketController {
             Merchandise merchandise=merchandiseservice.getMerchandise(id);
 
             if(!basketdetailservice.Exists(merchandise, customer)) {
-                AddMerchandise(customer,merchandise,qty);
+                return AddMerchandise(customer,merchandise,qty);
             }
 
             Basketdetail basketdetail=basketdetailservice.findBasketDetail(merchandise, customer);

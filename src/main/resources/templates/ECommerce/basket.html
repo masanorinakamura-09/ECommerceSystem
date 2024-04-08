@@ -19,12 +19,13 @@
         <td th:text="${data.merchandise.category}"></td>
         <td th:text="${data.merchandise.price}"></td>
         <td th:text="${data.qty}"></td>
-
-
-
     </tr>
     </table>
-    <tr>
+    <br>
+    合計金額:￥<a th:text="${payment}"></a>
+    <br>
     <a th:href="@{/sampleEC/home}">TOPに戻る</a>
+    </div>
 </body>
 </html>
+
