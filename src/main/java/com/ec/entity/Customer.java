@@ -8,7 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PreRemove;
 import jakarta.persistence.Table;
+import jakarta.transaction.Transactional;
 import lombok.Data;
 
 @Data
@@ -47,4 +49,14 @@ public class Customer {
 
     private String email;
 
+    @OneToOne(mappedBy="customer")
+    private Authentication authentication;
+
+    @PreRemove
+    @Transactional
+    private void preRemove() {
+        if(authentication!=null) {
+            authentication.setCustomer(null);
+        }
+    }
 }

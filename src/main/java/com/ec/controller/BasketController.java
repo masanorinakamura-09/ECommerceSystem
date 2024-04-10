@@ -2,6 +2,7 @@ package com.ec.controller;
 
 import java.util.List;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,9 @@ import com.ec.entity.Basketdetail;
 import com.ec.entity.Customer;
 import com.ec.entity.Merchandise;
 import com.ec.service.BasketdetailService;
+import com.ec.service.CustomerDetail;
 import com.ec.service.CustomerService;
+import com.ec.service.CustomerDetailService;
 import com.ec.service.MerchandiseService;
 
 @Controller
@@ -32,10 +35,10 @@ public class BasketController {
         this.customerservice = customerservice;
     }
 
-    @GetMapping("/{id}/")
-    public String getBasket(@PathVariable("id") Integer id,Model model,Model payment) {
+    @GetMapping("/detail/")
+    public String getBasket(@AuthenticationPrincipal CustomerDetail customerdetail,Model model,Model payment) {
 
-        List<Basketdetail> basketlist=basketdetailservice.getBasketList(id);
+        List<Basketdetail> basketlist=basketdetailservice.getBasketList(customerdetail.getCustomer().getId());
         model.addAttribute("merchandiselist",basketlist);
         var sum=0;
         for(Basketdetail item:basketlist){
@@ -47,8 +50,9 @@ public class BasketController {
 
     @PostMapping("/add/{id}/")
     public String UpdateMerchandise(@PathVariable("id") Integer id,
-            @RequestParam("qty") Integer qty) {
-            Customer customer=customerservice.getCustomer(1);
+            @RequestParam("qty") Integer qty,
+            @AuthenticationPrincipal CustomerDetail customerdetail) {
+            Customer customer=customerdetail.getCustomer();
             Merchandise merchandise=merchandiseservice.getMerchandise(id);
 
             if(!basketdetailservice.Exists(merchandise, customer)) {

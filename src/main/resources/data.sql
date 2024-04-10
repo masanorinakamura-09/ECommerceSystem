@@ -12,4 +12,10 @@ INSERT INTO merchandise(name,category,price,stock)VALUES("インク","家電",50
 
 INSERT INTO customer(age,name,post_code,telephone_number,address,email,prefectural,gender)
 VALUES(30,"吉田",8886666,0800909,"郡山市朝霞町111","emailaddress","福島県","男性");
+INSERT INTO customer(age,name,post_code,telephone_number,address,email,prefectural,gender)
+VALUES(35,"梶田",8886666,0800909,"郡山市朝霞町111","emailaddress","福島県","男性");
 
+INSERT INTO authentication(login_user,password,customer_id)
+VALUES("A","$2a$08$mPfQPp3PrwUABMDVnVYazezFEP5hY9AVegX.xMHSJ3E77x7JPMHOa",1);
+INSERT INTO authentication(login_user,password,customer_id)
+VALUES("B","$2a$08$xfPl04x/7RkiEjgGLqZqzO7MI0kg7yE5CCaKSDtuVCenAEEb.IPT.",2);

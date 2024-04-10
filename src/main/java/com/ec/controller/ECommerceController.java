@@ -1,16 +1,12 @@
 package com.ec.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ec.entity.Merchandise;
 import com.ec.service.MerchandiseService;
-
-import jakarta.persistence.EnumType;
-
 @Controller
 @RequestMapping("sampleEC")
 public class ECommerceController {
