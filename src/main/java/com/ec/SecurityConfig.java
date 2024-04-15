@@ -16,14 +16,15 @@ public class SecurityConfig {
                 .loginProcessingUrl("/login")
                 .loginPage("/login")
                 .defaultSuccessUrl("/sampleEC/home")
-                .failureUrl("/login?error")
+                .failureUrl("/sampleEC/home")
                 .permitAll()
                 ).logout(logout -> logout
                         .logoutSuccessUrl("/sampleEC/home")
+
                 ).authorizeHttpRequests(auth -> auth
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                         .permitAll()
-                        .requestMatchers("/sampleEC/**").permitAll()
+                        .requestMatchers("/smpleEC/**").permitAll()
                         .anyRequest().authenticated()
                         );
 

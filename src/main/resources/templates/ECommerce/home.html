@@ -7,6 +7,9 @@
 
 </head>
 <body>
+
+    <div th:replace="ECommerce/header :: header_fragment"></div>
+
     <h1>商品一覧</h1>
     <table>
     <tr>
@@ -39,9 +42,7 @@
     <br>
 <a th:href="@{/basket/detail/}">カートの中を見る</a>
 <br>
-<form method="post" th:action="@{/logout}">
-<input type="submit" value="ログアウト">
-</form><br>
+
 <a th:href="@{/sampleEC/home}">TOPに戻る</a>
 </body>
 </html>

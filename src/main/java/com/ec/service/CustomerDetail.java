@@ -10,7 +10,8 @@ import com.ec.entity.Customer;
 
 public class CustomerDetail implements UserDetails{
 
-    private static final long serialversionUID=1L;
+    private static final long serialVersionUID=1L;
+
 
     private final Customer customer;
     private final Collection<? extends GrantedAuthority> authorities;

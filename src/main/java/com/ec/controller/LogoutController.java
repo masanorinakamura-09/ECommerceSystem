@@ -8,6 +8,6 @@ public class LogoutController {
 
     @PostMapping("/logout")
     public String getLogout(){
-        return "redirect:/SampleEC";
+        return "redirect:/SampleEC/home";
     }
 }

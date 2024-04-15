@@ -36,7 +36,7 @@ public class BasketController {
     }
 
     @GetMapping("/detail/")
-    public String getBasket(@AuthenticationPrincipal CustomerDetail customerdetail,Model model,Model payment) {
+    public String getBasket(@AuthenticationPrincipal CustomerDetail customerdetail,Model model,Model payment,Model customer) {
 
         List<Basketdetail> basketlist=basketdetailservice.getBasketList(customerdetail.getCustomer().getId());
         model.addAttribute("merchandiselist",basketlist);
@@ -45,6 +45,7 @@ public class BasketController {
             sum+=item.getMerchandise().getPrice()*item.getQty();
         }
         payment.addAttribute("payment",sum);
+        customer.addAttribute("customer",customerdetail.getCustomer());
         return "ECommerce/basket";
     }
 

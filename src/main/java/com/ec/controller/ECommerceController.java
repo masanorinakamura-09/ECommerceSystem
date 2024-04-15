@@ -4,25 +4,38 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ec.service.CustomerDetail;
 import com.ec.service.MerchandiseService;
 @Controller
 @RequestMapping("sampleEC")
-public class ECommerceController {
+public class ECommerceController  {
     private final MerchandiseService service;
 
     public ECommerceController(MerchandiseService service) {
         this.service = service;
     }
 
-
     @GetMapping("/home")
+    public String getList(@AuthenticationPrincipal CustomerDetail customerdetail,Model model,Model customer) {
+
+        if(customerdetail==null) {
+            return getList(model);
+        }
+        model.addAttribute("merchandiselist",service.getMerchandisereList());
+        customer.addAttribute("customer",customerdetail.getCustomer());
+        return "ECommerce/home";
+    }
+
+
     public String getList(Model model) {
 
         model.addAttribute("merchandiselist",service.getMerchandisereList());
         return "ECommerce/home";
     }
+
 
     @GetMapping("/food")
     public String getFoodList(Model model) {

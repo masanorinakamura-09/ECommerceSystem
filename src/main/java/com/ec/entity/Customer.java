@@ -49,6 +49,8 @@ public class Customer {
 
     private String email;
 
+    private Integer cash;
+
     @OneToOne(mappedBy="customer")
     private Authentication authentication;
 

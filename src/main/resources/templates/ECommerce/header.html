@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Sample ECommerce Home</title>
+<link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+
+<header xmlns:th="http://www.thymeleaf.org" th:fragment="header_fragment">
+    <h1> <a th:href="@{/sampleEC/home}" th:text="サンプルショップ"></a></h1>
+
+    <div th:if="${customer != null}">
+    <a  th:text="${customer.name}"></a>
+    <form method="post" th:action="@{/logout}">
+    <input type="submit" value="ログアウト">
+    </form>
+    </div>
+    <br>
+
+    <div th:if="${customer == null}">
+    <a th:href="@{/login}" th:text="ログイン"></a>
+    </div>
+    <br>
+    </header>
+
+</body>
+</html>
