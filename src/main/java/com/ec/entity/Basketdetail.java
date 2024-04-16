@@ -25,7 +25,7 @@ public class Basketdetail {
     @JoinColumn(name="customer_id",referencedColumnName="id",nullable=false)
     private Customer customer;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="merchandise_id",referencedColumnName="id",nullable=false)
     private Merchandise merchandise;
 
