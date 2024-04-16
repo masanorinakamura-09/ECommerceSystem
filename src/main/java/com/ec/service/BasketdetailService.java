@@ -26,6 +26,11 @@ public class BasketdetailService {
         basketdetailRepository.save(basketdetail);
     }
 
+    @Transactional
+    public void DeleteMerchandise(Integer merchandiseId,Integer customerId) {
+    	basketdetailRepository.deleteByMerchandiseIdAndCustomerId(merchandiseId, customerId);
+    }
+
     public boolean Exists(Merchandise merchandise,Customer customer) {
         return basketdetailRepository.existsByMerchandiseIdAndCustomerId(merchandise.getId(),customer.getId());
     }

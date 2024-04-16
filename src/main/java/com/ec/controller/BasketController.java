@@ -67,6 +67,12 @@ public class BasketController {
             return "redirect:/sampleEC/home";
     }
 
+    @PostMapping("/delete/{id}/")
+    public String DeleteMerchandise(@PathVariable("id") Integer id,@AuthenticationPrincipal CustomerDetail customerdetail) {
+    	basketdetailservice.DeleteMerchandise(id, customerdetail.getCustomer().getId());
+    	return "redirect:/basket/detail/";
+    }
+
     public String AddMerchandise(Customer customer,Merchandise merchandise,
             Integer qty) {
             Basketdetail basketdetail=new Basketdetail();

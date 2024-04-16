@@ -18,11 +18,15 @@
         <th>カテゴリ</th>
         <th>価格</th>
         <th>個数</th>
+		<th>削除</th>
     <tr th:each="data : ${merchandiselist}">
         <td th:text="${data.merchandise.name}"></td>
         <td th:text="${data.merchandise.category}"></td>
         <td th:text="${data.merchandise.price}"></td>
         <td th:text="${data.qty}"></td>
+		<form method="post" th:action="@{/basket/delete/{id}/(id=${data.merchandise.id})}">
+		<td><input type="submit" value="カートから削除する"></td>
+		</form>
     </tr>
     </table>
     <br>
