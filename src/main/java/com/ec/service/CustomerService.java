@@ -16,4 +16,8 @@ public class CustomerService {
     public Customer getCustomer(Integer id) {
         return customerrepository.findById(id).get();
     }
+
+    public void saveCustomer(Customer customer) {
+        customerrepository.save(customer);
+    }
 }

@@ -15,5 +15,7 @@ public interface BasketdetailRepository extends JpaRepository<Basketdetail, Inte
 
     void deleteByMerchandiseIdAndCustomerId(Integer merchandaise_id,Integer customer_id);
 
+    void deleteByCustomerId(Integer customer_id);
+
     List<Basketdetail> findByCustomerId(Integer customer_id);
 }

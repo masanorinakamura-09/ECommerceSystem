@@ -1,5 +1,8 @@
 package com.ec.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -7,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PreRemove;
 import jakarta.persistence.Table;
@@ -50,6 +54,9 @@ public class Customer {
     private String email;
 
     private Integer cash;
+
+    @OneToMany(mappedBy="customer", cascade = CascadeType.ALL)
+    private List<Orderdetail> orderDetails;
 
     @OneToOne(mappedBy="customer")
     private Authentication authentication;

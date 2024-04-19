@@ -8,9 +8,6 @@
 </head>
 <body>
 
-    <div th:replace="ECommerce/header :: header_fragment"></div>
-
-
     <h1>カート内商品一覧</h1>
     <table>
     <tr>
@@ -18,27 +15,34 @@
         <th>カテゴリ</th>
         <th>価格</th>
         <th>個数</th>
-        <th>削除</th>
+
     <tr th:each="data : ${merchandiselist}">
         <td th:text="${data.merchandise.name}"></td>
         <td th:text="${data.merchandise.category}"></td>
         <td th:text="${data.merchandise.price}"></td>
         <td th:text="${data.qty}"></td>
-        <form method="post" th:action="@{/basket/delete/{id}/(id=${data.merchandise.id})}">
-        <td><input type="submit" value="カートから削除する"></td>
-        </form>
+
     </tr>
     </table>
     <br>
     合計金額:￥<a th:text="${payment}"></a>
     <br>
-    <div  th:if="!${#lists.isEmpty(merchandiselist)}">
-    <form method="post" th:action="@{/basket/payment}">
-        <input type="submit"  value="購入手続きへ">
+    <br>
+    ウォレット残額￥<a th:text="${customer.cash}"></a>
+    <br>
+    <br>
+    <div  th:if="${payment} <= ${customer.cash}">
+    <form method="post" th:action="@{/basket/determine/{id}/(id=${customer.id})}">
+        <input type="submit"  value="注文を確定する">
         </form>
     <br>
     </div>
-    <a th:href="@{/sampleEC/home}">TOPに戻る</a>
+    <div  th:unless="${payment} <= ${customer.cash}">
+    <a th:text="ウォレットの残高が不足してます"></a>
+    <br>
+    </div>
+    <a  th:href="@{/basket/detail/}">カートに戻る</a>
+    </div>
 </body>
 </html>
 

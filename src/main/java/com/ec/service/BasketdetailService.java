@@ -28,7 +28,12 @@ public class BasketdetailService {
 
     @Transactional
     public void DeleteMerchandise(Integer merchandiseId,Integer customerId) {
-    	basketdetailRepository.deleteByMerchandiseIdAndCustomerId(merchandiseId, customerId);
+        basketdetailRepository.deleteByMerchandiseIdAndCustomerId(merchandiseId, customerId);
+    }
+
+    @Transactional
+    public void DeleteBasket(Integer customerId) {
+        basketdetailRepository.deleteByCustomerId(customerId);
     }
 
     public boolean Exists(Merchandise merchandise,Customer customer) {
