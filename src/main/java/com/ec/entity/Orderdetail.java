@@ -24,15 +24,13 @@ public class Orderdetail {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name="customer_id",referencedColumnName="id")
-    private Customer customer;
-
-    @ManyToOne
     @JoinColumn(name="merchandise_id",referencedColumnName="id")
     private Merchandise merchandise;
 
     @Column(nullable=false)
     private Integer qty;
 
-    private String Status;
+    private String status;
+
+
 }

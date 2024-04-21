@@ -56,7 +56,7 @@ public class Customer {
     private Integer cash;
 
     @OneToMany(mappedBy="customer", cascade = CascadeType.ALL)
-    private List<Orderdetail> orderDetails;
+    private List<Orderlist> orderlists;
 
     @OneToOne(mappedBy="customer")
     private Authentication authentication;
