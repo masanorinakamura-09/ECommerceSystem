@@ -1,5 +1,8 @@
 package com.ec.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.ec.entity.Orderlist;
@@ -18,7 +21,11 @@ public class OrderlistService {
             orderlistrepository.save(orderlist);
         }
 
-        public Orderlist getOrderList(Integer customerid) {
+        public List<Orderlist> getOrderList(Integer customerid) {
             return orderlistrepository.findByCustomerId(customerid);
+        }
+
+        public Optional<Orderlist> getOrderDetailList(Integer id) {
+            return orderlistrepository.findById(id);
         }
 }

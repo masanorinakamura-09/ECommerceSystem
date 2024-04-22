@@ -30,10 +30,10 @@ public class Customer {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length=30)
+    @Column(length=30,nullable=false)
     private String name;
 
-    @Column
+    @Column(length=2,nullable=false)
     private Integer age;
 
     @Enumerated(EnumType.STRING)
@@ -42,17 +42,19 @@ public class Customer {
     @Column(nullable=false)
     private String prefectural;
 
-    @Column
+    @Column(nullable=false)
     private String address;
 
     @Column(nullable=false)
-    private Integer telephoneNumber;
+    private String telephoneNumber;
 
     @Column(nullable=false)
-    private Integer postCode;
+    private String postCode;
 
+    @Column(nullable=false)
     private String email;
 
+    @Column(nullable=false)
     private Integer cash;
 
     @OneToMany(mappedBy="customer", cascade = CascadeType.ALL)

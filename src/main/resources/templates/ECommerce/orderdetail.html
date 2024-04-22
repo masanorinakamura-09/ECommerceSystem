@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Sample ECommerce Home</title>
+<link rel="stylesheet" th:href="@{/css/home.css}">
+
+</head>
+<body>
+
+    <div th:replace="ECommerce/header :: header_fragment"></div>
+
+    <h1>注文明細</h1>
+    <table>
+    <tr>
+        <th>商品名</th>
+        <th>カテゴリ</th>
+        <th>価格</th>
+        <th>個数</th>
+        <th>出荷状況</th>
+    <tr th:each="data : ${orderlist.orderdetails}">
+        <td th:text="${data.merchandise.name}"></td>
+        <td th:text="${data.merchandise.category}"></td>
+        <td th:text="${data.merchandise.price}"></td>
+        <td th:text="${data.qty}"></td>
+        <td th:text="${data.status}"></td>
+    </tr>
+    </table>
+    <br>
+<a th:href="@{/customer/detail/}">お客様情報へ戻る</a>
+<br>
+
+<a th:href="@{/sampleEC/home}">TOPに戻る</a>
+</body>
+</html>

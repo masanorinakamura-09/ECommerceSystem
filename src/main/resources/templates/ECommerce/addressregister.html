@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Sample ECommerce Home</title>
+<link rel="stylesheet" th:href="@{/css/home.css}">
+
+</head>
+<body>
+
+
+
+    <h1>お送り先住所</h1>
+
+    <form method="post" th:action="@{/basket/determine/{id}/(id=${customer.id})}" th:object="${customer}" class="register_form">
+        <label for="name" class="form">名前</label>
+        <input type="text" th:field="*{name}">
+
+        <label for="postcode" class="form">郵便番号</label>
+        <input type="text" th:field="*{postCode}">
+
+        <label for="prefectual" class="form">県</label>
+        <input type="text" th:field="*{prefectual}">
+
+        <label for="address" class="form">住所</label>
+        <input type="text" th:field="*{address}">
+
+        <label for="telephonenumber" class="form">電話番号</label>
+        <input type="text" th:field="*{telephoneNumber}">
+        <input type="submit"  value="注文を確定する">
+        </form>
+    <br>
+
+    <a  th:href="@{/basket/detail/}">カートに戻る</a>
+</body>
+</html>
+

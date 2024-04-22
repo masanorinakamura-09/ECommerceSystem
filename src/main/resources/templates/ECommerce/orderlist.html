@@ -10,20 +10,26 @@
 
     <div th:replace="ECommerce/header :: header_fragment"></div>
 
-    <h1>商品一覧</h1>
+    <h1>注文履歴</h1>
     <table>
     <tr>
-        <th>商品名</th>
-        <th>カテゴリ</th>
-        <th>価格</th>
-        <th>個数</th>
-        <th>出荷状況</th>
-    <tr th:each="data : ${orderlist.orderdetails}">
-        <td th:text="${data.merchandise.name}"></td>
-        <td th:text="${data.merchandise.category}"></td>
-        <td th:text="${data.merchandise.price}"></td>
-        <td th:text="${data.qty}"></td>
-        <td th:text="${data.status}"></td>
+        <th>注文番号</th>
+        <th>注文日</th>
+        <th>送り先名前</th>
+        <th>送り先郵便番号</th>
+        <th>送り先住所</th>
+        <th>連絡先電話番号</th>
+    <tr th:each="data : ${orderlist}">
+        <td>
+        <form method="post" th:name="${data.id}" th:action="@{/customer/orderdetail/{id}/(id=${data.id})}">
+        <input type="submit" th:value="${data.id}">
+        </form>
+        </td>
+        <td th:text="${data.date}"></td>
+        <td th:text="${data.name}"></td>
+        <td th:text="${data.postCode}"></td>
+        <td th:text="${data.prefectual}+${data.address}"></td>
+        <td th:text="${data.telephoneNumber}"></td>
     </tr>
     </table>
     <br>

@@ -3,6 +3,7 @@ package com.ec.controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,6 @@ import com.ec.entity.Orderlist;
 import com.ec.service.BasketdetailService;
 import com.ec.service.CustomerDetail;
 import com.ec.service.CustomerService;
-import com.ec.service.CustomerDetailService;
 import com.ec.service.MerchandiseService;
 import com.ec.service.OrderdetailService;
 import com.ec.service.OrderlistService;
@@ -46,12 +46,11 @@ public class BasketController {
         this.orderdetailservice = orderdetailservice;
         this.orderlistservice = orderlistservice;
         this.customerservice = customerservice;
-
     }
 
 
     @GetMapping("/detail/")
-    public String getBasket(/*@AuthenticationPrincipal CustomerDetail customerdetail,Model model,Model paymentModel,Model customer*/) {
+    public String getBasket() {
         return "ECommerce/basket";
     }
 
@@ -96,11 +95,22 @@ public class BasketController {
             sum+=item.getMerchandise().getPrice()*item.getQty();
         }
 
+        LocalDate date=LocalDate.now();
+        Integer dateid=date.getDayOfMonth();
+        Random rand=new Random();
+        Integer randid=rand.nextInt(8999)+1000;
+
         Orderlist orderlist=new Orderlist();
-        orderlist.setId(000001);
+        orderlist.setId(Integer.parseInt(""+customer.getId()+dateid+randid));
         orderlist.setCustomer(customer);
         orderlist.setOrderdetails(orderdetails);
-        orderlist.setDate(LocalDate.now());
+        orderlist.setDate(date);
+
+        orderlist.setName(customer.getName());
+        orderlist.setPostCode(customer.getPostCode());
+        orderlist.setPrefectual(customer.getPrefectural());
+        orderlist.setAddress(customer.getAddress());
+        orderlist.setTelephoneNumber(customer.getTelephoneNumber());
 
         orderlistservice.saveOrderList(orderlist);
         basketdetailservice.DeleteBasket(customer.getId());
