@@ -78,7 +78,7 @@ public class BasketController {
         return "redirect:/basket/detail/";
     }
 
-    @PostMapping("/determine/{id}/")
+    @PostMapping("/determine/")
     public String Determine(@AuthenticationPrincipal CustomerDetail customerdetail) {
         List<Basketdetail> basketlist=basketdetailservice.getBasketList(customerdetail.getCustomer().getId());
         Customer customer=customerdetail.getCustomer();
@@ -114,6 +114,7 @@ public class BasketController {
 
         orderlistservice.saveOrderList(orderlist);
         basketdetailservice.DeleteBasket(customer.getId());
+
         customer.setCash(customer.getCash()-sum);
         customerservice.saveCustomer(customer);
 
@@ -132,7 +133,20 @@ public class BasketController {
     }
 
     @PostMapping("/payment")
-    public String Payment(Model paymentModel) {
+    public String Payment() {
+        return "ECommerce/payment";
+    }
+
+
+    @GetMapping("/address")
+    public String GetAddress() {
+        return "ECommerce/addressregister";
+    }
+
+    @PostMapping("/address")
+    public String ChangeAddress(Model model,
+           Customer customer) {
+        model.addAttribute("customer",customer);
         return "ECommerce/payment";
     }
 

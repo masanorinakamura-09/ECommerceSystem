@@ -25,6 +25,29 @@
     </tr>
     </table>
     <br>
+    <h3>送り先住所</h3>
+    <table>
+        <tr>
+        <th>氏名</th>
+        <td th:text="${customer.name}"></td>
+        </tr>
+
+        <tr>
+        <th>郵便番号</th>
+        <td th:text="${customer.postCode}"></td>
+        </tr>
+
+        <tr>
+        <th>住所</th>
+        <td th:text="${customer.prefectural}+${customer.address}"></td>
+        </tr>
+
+        <tr>
+        <th>電話番号</th>
+        <td th:text="${customer.telephoneNumber}"></td>
+        </tr>
+        </table>
+    <br>
     合計金額:￥<a th:text="${payment}"></a>
     <br>
     <br>
@@ -32,9 +55,11 @@
     <br>
     <br>
     <div  th:if="${payment} <= ${customer.cash}">
-    <form method="post" th:action="@{/basket/determine/{id}/(id=${customer.id})}">
+    <form method="post" th:action="@{/basket/determine/}">
         <input type="submit"  value="注文を確定する">
         </form>
+
+        <a th:href="@{/basket/address}" >送り先情報を変更する</a>
     <br>
     </div>
     <div  th:unless="${payment} <= ${customer.cash}">
