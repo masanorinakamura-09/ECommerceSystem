@@ -14,32 +14,32 @@
     <table>
         <tr>
         <th>氏名</th>
-        <td th:text="${customer.name}"></td>
+        <td th:text="${loginuser.name}"></td>
         </tr>
 
         <tr>
         <th>性別</th>
-        <td th:text="${customer.gender}"></td>
+        <td th:text="${loginuser.gender}"></td>
         </tr>
 
         <tr>
         <th>年齢</th>
-        <td th:text="${customer.age}"></td>
+        <td th:text="${loginuser.age}"></td>
         </tr>
 
         <tr>
         <th>郵便番号</th>
-        <td th:text="${customer.postCode}"></td>
+        <td th:text="${useraddress.postCode}"></td>
         </tr>
 
         <tr>
         <th>住所</th>
-        <td th:text="${customer.prefectural}+${customer.address}"></td>
+        <td th:text="${useraddress.prefectural}+${useraddress.municipalities}"></td>
         </tr>
 
         <tr>
         <th>電話番号</th>
-        <td th:text="${customer.telephoneNumber}"></td>
+        <td th:text="${loginuser.telephoneNumber}"></td>
         </tr>
 
         </form>

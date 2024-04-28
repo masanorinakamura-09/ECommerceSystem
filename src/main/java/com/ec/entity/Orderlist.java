@@ -13,7 +13,6 @@ import lombok.Data;
 
 @Data
 @Entity
-
 public class Orderlist {
 
     @Id
@@ -26,20 +25,19 @@ public class Orderlist {
     @JoinColumn(name="order_detail",referencedColumnName="id")
     private List<Orderdetail> orderdetails;
 
-    @Column(nullable=false)
+    @ManyToOne
+    @JoinColumn(name="address_id",referencedColumnName="id")
+    private Address address;
+
+    /*@Column(nullable=false)
     private String name;
 
-    @Column(nullable=false)
-    private String postCode;
+    @ManyToOne
+    @JoinColumn(name="address",referencedColumnName="id")
+    private Address address;
 
     @Column(nullable=false)
-    private String prefectual;
-
-    @Column(nullable=false)
-    private String address;
-
-    @Column(nullable=false)
-    private String telephoneNumber;
+    private String telephoneNumber;*/
 
     @Column(nullable=false)
     private LocalDate date;

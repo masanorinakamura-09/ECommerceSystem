@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ec.entity.Address;
 import com.ec.entity.Customer;
 import com.ec.entity.Orderlist;
+import com.ec.service.AddressService;
 import com.ec.service.CustomerDetail;
 import com.ec.service.OrderlistService;
 
@@ -20,9 +22,11 @@ import com.ec.service.OrderlistService;
 @RequestMapping("customer")
 public class CustomerController {
     private final OrderlistService orderlistservice;
+    private final AddressService addressservice;
 
-    public CustomerController(OrderlistService ordelistservice) {
+    public CustomerController(OrderlistService ordelistservice, AddressService addressservice) {
         this.orderlistservice = ordelistservice;
+        this.addressservice = addressservice;
     }
 
     @GetMapping("/detail/")
@@ -42,7 +46,7 @@ public class CustomerController {
         return "ECommerce/orderdetail";
     }
 
-    @ModelAttribute("customer")
+    @ModelAttribute("loginuser")
     public Customer customer(@AuthenticationPrincipal CustomerDetail customerdetail) {
         return customerdetail.getCustomer();
     }
@@ -52,5 +56,10 @@ public class CustomerController {
         List<Orderlist> orderlist=orderlistservice.getOrderList(customerdetail.getCustomer().getId());
         return orderlistservice.getOrderList(customerdetail.getCustomer().getId());
     }
+
+    @ModelAttribute("useraddress")
+    public Address address(@AuthenticationPrincipal CustomerDetail customerdetail) {
+    return addressservice.getAddress(customerdetail.getCustomer().getId());
+            }
 }
 

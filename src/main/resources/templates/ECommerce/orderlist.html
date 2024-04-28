@@ -26,10 +26,10 @@
         </form>
         </td>
         <td th:text="${data.date}"></td>
-        <td th:text="${data.name}"></td>
-        <td th:text="${data.postCode}"></td>
-        <td th:text="${data.prefectual}+${data.address}"></td>
-        <td th:text="${data.telephoneNumber}"></td>
+        <td th:text="${data.address.name}"></td>
+        <td th:text="${data.address.postCode}"></td>
+        <td th:text="${data.address.prefectural}+${data.address.municipalities}"></td>
+        <td th:text="${data.address.telephoneNumber}"></td>
     </tr>
     </table>
     <br>

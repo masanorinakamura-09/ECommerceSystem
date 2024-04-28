@@ -29,40 +29,39 @@
     <table>
         <tr>
         <th>氏名</th>
-        <td th:text="${customer.name}"></td>
+        <td th:text="${useraddress.name}"></td>
         </tr>
 
         <tr>
         <th>郵便番号</th>
-        <td th:text="${customer.postCode}"></td>
+        <td th:text="${useraddress.postCode}"></td>
         </tr>
 
         <tr>
         <th>住所</th>
-        <td th:text="${customer.prefectural}+${customer.address}"></td>
+        <td th:text="${useraddress.prefectural}+${useraddress.municipalities}"></td>
         </tr>
 
         <tr>
         <th>電話番号</th>
-        <td th:text="${customer.telephoneNumber}"></td>
+        <td th:text="${useraddress.telephoneNumber}"></td>
         </tr>
         </table>
     <br>
     合計金額:￥<a th:text="${payment}"></a>
     <br>
     <br>
-    ウォレット残額￥<a th:text="${customer.cash}"></a>
+    ウォレット残額￥<a th:text="${loginuser.cash}"></a>
     <br>
     <br>
-    <div  th:if="${payment} <= ${customer.cash}">
+    <a th:href="@{/basket/address}" >送り先情報を変更する</a>
+    <div  th:if="${payment} <= ${loginuser.cash}">
     <form method="post" th:action="@{/basket/determine/}">
         <input type="submit"  value="注文を確定する">
         </form>
-
-        <a th:href="@{/basket/address}" >送り先情報を変更する</a>
     <br>
     </div>
-    <div  th:unless="${payment} <= ${customer.cash}">
+    <div  th:unless="${payment} <= ${loginuser.cash}">
     <a th:text="ウォレットの残高が不足してます"></a>
     <br>
     </div>

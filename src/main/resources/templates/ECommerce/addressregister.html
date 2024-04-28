@@ -8,27 +8,25 @@
 </head>
 <body>
 
-
-
     <h1>お送り先住所</h1>
 
-    <form method="post" th:action="@{/basket/address}" th:object="${customer}" class="register_form">
+    <form method="post" th:action="@{/basket/address}" th:object="${address}" class="register_form">
         <label for="name" class="form">名前</label>
-        <input type="text" th:field="*{name}">
+        <input type="text" th:field="*{name}" >
         <br>
-        <label for="postcode" class="form">郵便番号</label>
+        <label for="postCode" class="form">郵便番号</label>
         <input type="text" th:field="*{postCode}">
         <br>
         <label for="prefectual" class="form">県</label>
         <input type="text" th:field="*{prefectural}">
         <br>
         <label for="address" class="form">住所</label>
-        <input type="text" th:field="*{address}">
+        <input type="text" th:field="*{municipalities}">
         <br>
         <label for="telephonenumber" class="form">電話番号</label>
         <input type="text" th:field="*{telephoneNumber}">
         <br>
-        <input type="submit"  value="送り先を変更する">
+        <input type="submit"  value="送り先情報を登録する">
         </form>
     <br>
 

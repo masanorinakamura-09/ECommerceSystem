@@ -40,16 +40,7 @@ public class Customer {
     private Gender gender;
 
     @Column(nullable=false)
-    private String prefectural;
-
-    @Column(nullable=false)
-    private String address;
-
-    @Column(nullable=false)
     private String telephoneNumber;
-
-    @Column(nullable=false)
-    private String postCode;
 
     @Column(nullable=false)
     private String email;

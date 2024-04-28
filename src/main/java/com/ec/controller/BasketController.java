@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ec.entity.Address;
 import com.ec.entity.Basketdetail;
 import com.ec.entity.Customer;
 import com.ec.entity.Merchandise;
 import com.ec.entity.Orderdetail;
 import com.ec.entity.Orderlist;
+import com.ec.service.AddressService;
 import com.ec.service.BasketdetailService;
 import com.ec.service.CustomerDetail;
 import com.ec.service.CustomerService;
@@ -34,18 +36,18 @@ public class BasketController {
     private final MerchandiseService merchandiseservice;
     private final OrderdetailService orderdetailservice;
     private final OrderlistService orderlistservice;
-    private final CustomerService customerservice;
+    private final AddressService addressservice;
 
     public BasketController(BasketdetailService basketdetailservice,
             MerchandiseService merchandiseservice,
             CustomerService customerservice,
             OrderlistService orderlistservice,
-            OrderdetailService orderdetailservice) {
+            OrderdetailService orderdetailservice, AddressService addressservice) {
         this.basketdetailservice = basketdetailservice;
         this.merchandiseservice = merchandiseservice;
         this.orderdetailservice = orderdetailservice;
         this.orderlistservice = orderlistservice;
-        this.customerservice = customerservice;
+        this.addressservice = addressservice;
     }
 
 
@@ -80,8 +82,8 @@ public class BasketController {
 
     @PostMapping("/determine/")
     public String Determine(@AuthenticationPrincipal CustomerDetail customerdetail) {
-        List<Basketdetail> basketlist=basketdetailservice.getBasketList(customerdetail.getCustomer().getId());
         Customer customer=customerdetail.getCustomer();
+        List<Basketdetail> basketlist=basketdetailservice.getBasketList(customer.getId());
         var sum=0;
         List<Orderdetail> orderdetails=new ArrayList<Orderdetail>();
 
@@ -106,17 +108,14 @@ public class BasketController {
         orderlist.setOrderdetails(orderdetails);
         orderlist.setDate(date);
 
-        orderlist.setName(customer.getName());
-        orderlist.setPostCode(customer.getPostCode());
-        orderlist.setPrefectual(customer.getPrefectural());
-        orderlist.setAddress(customer.getAddress());
-        orderlist.setTelephoneNumber(customer.getTelephoneNumber());
+        orderlist.setAddress(addressservice.getAddress(customer.getId()));
 
         orderlistservice.saveOrderList(orderlist);
         basketdetailservice.DeleteBasket(customer.getId());
 
-        customer.setCash(customer.getCash()-sum);
-        customerservice.saveCustomer(customer);
+        //customer=customerdetail.getCustomer();
+        //customer.setCash(customer.getCash()-sum);
+        //customerservice.saveCustomer(customer);
 
         return "redirect:/sampleEC/home";
     }
@@ -139,18 +138,23 @@ public class BasketController {
 
 
     @GetMapping("/address")
-    public String GetAddress() {
+    public String GetAddress(Model model,Address address) {
+        model.addAttribute("address", address);
         return "ECommerce/addressregister";
     }
 
     @PostMapping("/address")
-    public String ChangeAddress(Model model,
-           Customer customer) {
-        model.addAttribute("customer",customer);
+    public String ChangeAddress(Address address,
+            @AuthenticationPrincipal CustomerDetail customerdetail) {
+        if(!(addressservice.existsAddress(customerdetail.getCustomer().getId()
+                , address.getPostCode()))){
+        address.setCustomer(customerdetail.getCustomer());
+        addressservice.saveAddress(address);
+        }
         return "ECommerce/payment";
     }
 
-    @ModelAttribute("customer")
+    @ModelAttribute("loginuser")
     public Customer customer(@AuthenticationPrincipal CustomerDetail customerdetail) {
         return customerdetail.getCustomer();
     }
@@ -168,5 +172,11 @@ public class BasketController {
             sum+=item.getMerchandise().getPrice()*item.getQty();
         }
         return sum;
+    }
+
+    @ModelAttribute("useraddress")
+    public Address address(@AuthenticationPrincipal CustomerDetail customerdetail) {
+        Address a=addressservice.getAddress(customerdetail.getCustomer().getId());
+    return addressservice.getAddress(customerdetail.getCustomer().getId());
     }
 }
