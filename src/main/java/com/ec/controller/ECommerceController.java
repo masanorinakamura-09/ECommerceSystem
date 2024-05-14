@@ -1,20 +1,37 @@
 package com.ec.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ec.entity.Address;
+import com.ec.entity.Customer;
+import com.ec.service.AddressService;
 import com.ec.service.CustomerDetail;
+import com.ec.service.CustomerService;
 import com.ec.service.MerchandiseService;
 @Controller
 @RequestMapping("sampleEC")
 public class ECommerceController  {
     private final MerchandiseService service;
+    private final CustomerService customerservice;
+    private final AddressService addressservice;
 
-    public ECommerceController(MerchandiseService service) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public ECommerceController(MerchandiseService service, CustomerService customerservice, AddressService addressservice) {
         this.service = service;
+        this.customerservice = customerservice;
+        this.addressservice = addressservice;
     }
 
     @GetMapping("/home")
@@ -24,7 +41,7 @@ public class ECommerceController  {
             return getList(model);
         }
         model.addAttribute("merchandiselist",service.getMerchandisereList());
-        customer.addAttribute("customer",customerdetail.getCustomer());
+        customer.addAttribute("loginuser",customerdetail.getCustomer());
         return "ECommerce/home";
     }
 
@@ -66,7 +83,40 @@ public class ECommerceController  {
         return "ECommerce/home";
     }
 
+    @GetMapping("/customer_register")
+    public String getCustomerRegister(Model model,Customer customer,Address address) {
+        model.addAttribute("customer",customer);
+        model.addAttribute("address",address);
+        return "ECommerce/customer_register";
+    }
 
+    @PostMapping("/customer_register")
+    public String customerRegister(@Validated Customer customer,BindingResult resultc,
+           @Validated Address address,BindingResult resulta,Model model) {
+
+
+        customer.setCash(10000);
+        customer.getAuthentication().setCustomer(customer);
+
+        String password=customer.getAuthentication().getPassword();
+        customer.getAuthentication().setPassword(passwordEncoder.encode(password));
+
+
+        address.setCustomer(customer);
+        address.setName(customer.getName());
+        address.setTelephoneNumber(customer.getTelephoneNumber());
+        address.setPriority(true);
+
+        if(resultc.hasErrors()||resulta.hasErrors()) {
+            return getCustomerRegister(model,customer,address);
+        }
+
+
+        customerservice.saveCustomer(customer);
+        addressservice.saveAddress(address);
+
+        return "redirect:/sampleEC/home";
+    }
 
 }
 

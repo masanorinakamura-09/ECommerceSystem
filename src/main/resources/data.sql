@@ -28,10 +28,12 @@ VALUES(30,"吉田",0800909,"emailaddress","男性",20000);
 INSERT INTO customer(age,name,telephone_number,email,gender,cash)
 VALUES(35,"梶田",0800909,"emailaddress","男性",100);
 
-INSERT INTO address(customer_id,name,post_code,municipalities,prefectural,telephone_number,priority,selected)
-VALUES(1,"吉田",8886666,"郡山市朝霞町111","福島県","0800909",true,true);
-INSERT INTO address(customer_id,name,post_code,municipalities,prefectural,telephone_number,priority,selected)
-VALUES(2,"梶田",8886666,"郡山市朝霞町111","福島県","0800909",true,true);
+INSERT INTO address(customer_id,name,post_code,municipalities,prefectural,telephone_number,priority)
+VALUES(1,"吉田",8886666,"郡山市朝霞町111","福島県","0800909",true);
+INSERT INTO address(customer_id,name,post_code,municipalities,prefectural,telephone_number,priority)
+VALUES(1,"吉田",1234567,"新宿３","東京都","1234567890",false);
+INSERT INTO address(customer_id,name,post_code,municipalities,prefectural,telephone_number,priority)
+VALUES(2,"梶田",8886666,"郡山市朝霞町111","福島県","0800909",true);
 
 INSERT INTO authentication(login_user,password,customer_id)
 VALUES("A","$2a$08$mPfQPp3PrwUABMDVnVYazezFEP5hY9AVegX.xMHSJ3E77x7JPMHOa",1);

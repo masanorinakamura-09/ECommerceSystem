@@ -10,8 +10,8 @@
 <header xmlns:th="http://www.thymeleaf.org" th:fragment="header_fragment">
     <h1> <a th:href="@{/sampleEC/home}" th:text="サンプルショップ"></a></h1>
 
-    <div th:if="${customer != null}">
-    <a  th:text="${customer.name}"></a>
+    <div th:if="${loginuser != null}">
+    <a  th:text="${loginuser.name}"></a>
     <a th:href="@{/customer/detail/}" th:text="お客様情報"></a>
     <form method="post" th:action="@{/logout}">
     <input type="submit" value="ログアウト">
@@ -19,8 +19,9 @@
     </div>
     <br>
 
-    <div th:if="${customer == null}">
+    <div th:if="${loginuser == null}">
     <a th:href="@{/login}" th:text="ログイン"></a>
+    <a th:href="@{/sampleEC/customer_register}" th:text="新規会員登録"></a>
     </div>
     <br>
     </header>

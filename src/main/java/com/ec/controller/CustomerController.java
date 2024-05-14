@@ -46,6 +46,13 @@ public class CustomerController {
         return "ECommerce/orderdetail";
     }
 
+    @GetMapping("/addresslist/")
+    public String GetAddressList(@AuthenticationPrincipal CustomerDetail customerdetail,Model model) {
+        List<Address> addressList=addressservice.getAddressList(customerdetail.getCustomer().getId());
+        model.addAttribute("addresslist",addressList);
+        return "ECommerce/addresslist";
+    }
+
     @ModelAttribute("loginuser")
     public Customer customer(@AuthenticationPrincipal CustomerDetail customerdetail) {
         return customerdetail.getCustomer();
@@ -53,13 +60,12 @@ public class CustomerController {
 
     @ModelAttribute("orderlist")
     public List<Orderlist> orderlist(@AuthenticationPrincipal CustomerDetail customerdetail) {
-        List<Orderlist> orderlist=orderlistservice.getOrderList(customerdetail.getCustomer().getId());
         return orderlistservice.getOrderList(customerdetail.getCustomer().getId());
     }
 
     @ModelAttribute("useraddress")
     public Address address(@AuthenticationPrincipal CustomerDetail customerdetail) {
-    return addressservice.getAddress(customerdetail.getCustomer().getId());
+    return addressservice.getPriorityAddress(customerdetail.getCustomer().getId());
             }
 }
 

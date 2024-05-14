@@ -13,15 +13,12 @@ import lombok.Data;
 @Table(name="merchandise")
 public class Merchandise {
 
-
-
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
     @Column(length=30,nullable=false)
     private String name;
-
 
     private String category;
 

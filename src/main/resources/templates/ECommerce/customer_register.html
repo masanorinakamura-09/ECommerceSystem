@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Sample ECommerce Home</title>
+<link rel="stylesheet" th:href="@{/css/home.css}">
+
+</head>
+<body>
+
+
+    <h1>お客様情報</h1>
+    <form method="post" th:action="@{/sampleEC/customer_register}"  class="customer_register">
+    <div th:object="${customer}">
+    <label for="name" class="form">氏名</label>
+    <input type="text" th:field="*{name}">
+    <span th:errors=*{name} class="err"></span>
+    <br>
+    <label for="age" class="form">年齢</label>
+    <input type="text" th:field="*{age}">
+    <span th:errors=*{age} class="err"></span>
+    <br>
+    <label for="gender" class="form">性別</label>
+    <select th:field="*{gender}">
+    <option th:each="item:${T(com.ec.entity.Customer.Gender).values()}"
+    th:value="${item}" th:text="${item}">
+    </select>
+    <br>
+    <label for="telephoneNumber" class="form">電話番号</label>
+    <input type="text" th:field="*{telephoneNumber}">
+    <span  th:errors=*{telephoneNumber} class="err"></span>
+    <br>
+    <label for="email" class="form">Eメールアドレス</label>
+    <input type="text" th:field="*{email}">
+    <span th:errors=*{email} class="err"></span>
+    <br>
+
+    <label for="loginid" class="form">ログインID</label>
+    <input type="text" th:field="*{authentication.LoginUser}">
+    <span th:errors=*{authentication.LoginUser} class="err"></span>
+    <br>
+    <label for="password" class="form">パスワード</label>
+    <input type="password" th:field="*{authentication.password}">
+    <span th:errors=*{authentication.password} class="err"></span>
+    <br>
+    </div>
+
+    <div th:object="${address}">
+    <label for="postCode" class="form">郵便番号</label>
+    <input type="text" th:field="*{postCode}">
+    <span th:errors=*{postCode} class="err"></span>
+    <br>
+    <label for="prefectural" class="form">都道府県</label>
+    <input type="text" th:field="*{prefectural}">
+        <span th:errors=*{prefectural} class="err"></span>
+
+    <br>
+    <label for="municipalities" class="form">市町村以降</label>
+    <input type="text" th:field="*{municipalities}">
+    <span th:errors=*{municipalities} class="err"></span>
+    <br>
+    </div>
+
+    <input type="submit" value="会員登録する"  class="customer_register">
+    </form>
+<a th:href="@{/sampleEC/home}">TOPに戻る</a>
+</body>
+</html>

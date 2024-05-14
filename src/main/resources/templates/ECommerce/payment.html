@@ -26,6 +26,7 @@
     </table>
     <br>
     <h3>送り先住所</h3>
+
     <table>
         <tr>
         <th>氏名</th>
@@ -56,7 +57,8 @@
     <br>
     <a th:href="@{/basket/address}" >送り先情報を変更する</a>
     <div  th:if="${payment} <= ${loginuser.cash}">
-    <form method="post" th:action="@{/basket/determine/}">
+    <form method="post" th:action="@{/basket/determine/}" >
+        <input type="hidden" th:value="${useraddress.id}" th:name="id">
         <input type="submit"  value="注文を確定する">
         </form>
     <br>

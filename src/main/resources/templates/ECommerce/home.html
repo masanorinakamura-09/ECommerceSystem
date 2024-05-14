@@ -23,7 +23,7 @@
         <td th:text="${data.category}"></td>
         <td th:text="${data.price}"></td>
 
-        <form method="post" th:action="@{/basket/add/{id}/(id=${data.id})}"  >
+        <form method="post" th:action="@{/basket/add/{id}/(id=${data.id})}" onsubmit="checkText()" >
         <td><select th:name="qty">
         <option value=1>1</option>
         <option value=2>2</option>
@@ -44,5 +44,11 @@
 <br>
 
 <a th:href="@{/sampleEC/home}">TOPに戻る</a>
+<script>
+    function checkText(){
+    window.confirm("商品をカートに入れますか？");
+    }
+
+</script>
 </body>
 </html>

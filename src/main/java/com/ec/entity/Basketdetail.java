@@ -6,10 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -22,13 +21,16 @@ public class Basketdetail {
     private Integer id;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name="customer_id",referencedColumnName="id",nullable=false)
     private Customer customer;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name="merchandise_id",referencedColumnName="id",nullable=false)
     private Merchandise merchandise;
 
     @Column(nullable=false)
+    @NotNull
     private Integer qty;
 }

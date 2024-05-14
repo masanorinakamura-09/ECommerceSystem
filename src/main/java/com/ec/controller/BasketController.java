@@ -8,6 +8,8 @@ import java.util.Random;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,7 @@ import com.ec.entity.Basketdetail;
 import com.ec.entity.Customer;
 import com.ec.entity.Merchandise;
 import com.ec.entity.Orderdetail;
+import com.ec.entity.Orderdetail.Status;
 import com.ec.entity.Orderlist;
 import com.ec.service.AddressService;
 import com.ec.service.BasketdetailService;
@@ -59,7 +62,8 @@ public class BasketController {
     @PostMapping("/add/{id}/")
     public String UpdateMerchandise(@AuthenticationPrincipal CustomerDetail customerdetail,
             @PathVariable("id") Integer id,
-            @RequestParam("qty") Integer qty) {
+            @RequestParam("qty") Integer qty,
+            Model model) {
             Customer customer=customerdetail.getCustomer();
             Merchandise merchandise=merchandiseservice.getMerchandise(id);
 
@@ -71,6 +75,7 @@ public class BasketController {
             basketdetail.setQty(basketdetail.getQty()+qty);
 
             basketdetailservice.saveBasketdetail(basketdetail);
+            model.addAttribute("success",true);
             return "redirect:/sampleEC/home";
     }
 
@@ -81,7 +86,8 @@ public class BasketController {
     }
 
     @PostMapping("/determine/")
-    public String Determine(@AuthenticationPrincipal CustomerDetail customerdetail) {
+    public String Determine(@AuthenticationPrincipal CustomerDetail customerdetail
+            ,Address address,@RequestParam("id")Integer id) {
         Customer customer=customerdetail.getCustomer();
         List<Basketdetail> basketlist=basketdetailservice.getBasketList(customer.getId());
         var sum=0;
@@ -91,6 +97,7 @@ public class BasketController {
             Orderdetail orderdetail=new Orderdetail();
             orderdetail.setMerchandise(item.getMerchandise());
             orderdetail.setQty(item.getQty());
+            orderdetail.setStatus(Status.受注);
 
             orderdetails.add(orderdetail);
             orderdetailservice.saveOrder(orderdetail);
@@ -108,14 +115,10 @@ public class BasketController {
         orderlist.setOrderdetails(orderdetails);
         orderlist.setDate(date);
 
-        orderlist.setAddress(addressservice.getAddress(customer.getId()));
+        orderlist.setAddress(addressservice.getAddress(id).get());
 
         orderlistservice.saveOrderList(orderlist);
         basketdetailservice.DeleteBasket(customer.getId());
-
-        //customer=customerdetail.getCustomer();
-        //customer.setCash(customer.getCash()-sum);
-        //customerservice.saveCustomer(customer);
 
         return "redirect:/sampleEC/home";
     }
@@ -131,6 +134,11 @@ public class BasketController {
             return "redirect:/sampleEC/home";
     }
 
+    @GetMapping("/payment")
+    public String GetPayment() {
+        return "ECommerce/payment";
+    }
+
     @PostMapping("/payment")
     public String Payment() {
         return "ECommerce/payment";
@@ -138,19 +146,36 @@ public class BasketController {
 
 
     @GetMapping("/address")
-    public String GetAddress(Model model,Address address) {
+    public String GetAddress(Model model,Address address,@AuthenticationPrincipal CustomerDetail customerdetail) {
+        List<Address> addressList=addressservice.getAddressList(customerdetail.getCustomer().getId());
+
         model.addAttribute("address", address);
+        model.addAttribute("addresslist", addressList);
         return "ECommerce/addressregister";
     }
 
     @PostMapping("/address")
-    public String ChangeAddress(Address address,
-            @AuthenticationPrincipal CustomerDetail customerdetail) {
+    public String ChangeAddress(@Validated Address address,BindingResult result,
+            @AuthenticationPrincipal CustomerDetail customerdetail,Model model) {
+        address.setCustomer(customerdetail.getCustomer());
+        address.setPriority(false);
+
+        if(result.hasErrors()) {
+            return GetAddress(model,address,customerdetail);
+        }
+
         if(!(addressservice.existsAddress(customerdetail.getCustomer().getId()
                 , address.getPostCode()))){
-        address.setCustomer(customerdetail.getCustomer());
         addressservice.saveAddress(address);
         }
+
+        return "ECommerce/payment";
+    }
+
+    @PostMapping("/selectaddress")
+    public String SelectAddress(Model model,@RequestParam("selectaddress")Integer id) {
+        Address address= addressservice.getAddress(id).get();
+        model.addAttribute("useraddress",address);
         return "ECommerce/payment";
     }
 
@@ -176,7 +201,6 @@ public class BasketController {
 
     @ModelAttribute("useraddress")
     public Address address(@AuthenticationPrincipal CustomerDetail customerdetail) {
-        Address a=addressservice.getAddress(customerdetail.getCustomer().getId());
-    return addressservice.getAddress(customerdetail.getCustomer().getId());
+    return addressservice.getPriorityAddress(customerdetail.getCustomer().getId());
     }
 }

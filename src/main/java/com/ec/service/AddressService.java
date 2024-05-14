@@ -1,5 +1,8 @@
 package com.ec.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.ec.entity.Address;
@@ -14,8 +17,12 @@ public class AddressService {
         this.addressrepository = addressrepository;
     }
 
-    public Address getAddress(Integer id) {
+    public Address getPriorityAddress(Integer id) {
         return  addressrepository.findByCustomerIdAndPriority(id, true);
+    }
+
+    public Optional<Address> getAddress(Integer id) {
+        return addressrepository.findById(id);
     }
 
     public void saveAddress(Address address) {
@@ -24,5 +31,9 @@ public class AddressService {
 
     public boolean existsAddress(Integer id,String code) {
         return addressrepository.existsByCustomerIdAndPostCode(id, code);
+    }
+
+    public List<Address> getAddressList(Integer id){
+        return addressrepository.findByCustomerId(id);
     }
 }

@@ -8,58 +8,45 @@
 </head>
 <body>
 
-<h1>お送り先住所</h1>
-    <form method="post" th:action="@{/basket/selectaddress}" th:object="${data}" id="select_form">
+<h1>配送先一覧</h1>
     <table>
     <tr>
-        <th>選択</th>
         <th>名前</th>
         <th>郵便番号</th>
         <th>住所</th>
         <th>電話番号</th>
     <tr th:each="data : ${addresslist}">
-        <td>
-
-            <div th:if="${!data.priority}"><input type="radio" th:value="${data.id}" name="selectaddress" ></div>
-            <div th:if="${data.priority}"><input type="radio" th:value="${data.id}" name="selectaddress" checked></div>
-        </td>
         <td th:text="${data.name}"></td>
         <td th:text="${data.postCode}"></td>
         <td th:text="${data.prefectural}+${data.municipalities}"></td>
         <td th:text="${data.telephoneNumber}"></td>
     </tr>
     </table>
-
-    <input type="submit"   value="選択した住所を使用する" id="select_form">
     </form>
 
+    <!--
     <h2>新規送り先情報を登録する</h2>
     <form method="post" th:action="@{/basket/address}" th:object="${address}" id="register_form">
         <label for="name" class="form">名前</label>
         <input type="text" th:field="*{name}" >
-        <span th:errors=*{name} class="err"></span>
         <br>
         <label for="postCode" class="form">郵便番号</label>
         <input type="text" th:field="*{postCode}">
-        <span th:errors=*{postCode} class="err"></span>
         <br>
         <label for="prefectual" class="form">県</label>
         <input type="text" th:field="*{prefectural}">
-        <span th:errors=*{prefectural} class="err"></span>
         <br>
         <label for="address" class="form">住所</label>
         <input type="text" th:field="*{municipalities}">
-        <span th:errors=*{municipalities} class="err"></span>
         <br>
         <label for="telephonenumber" class="form">電話番号</label>
         <input type="text" th:field="*{telephoneNumber}">
-        <span th:errors=*{telephoneNumber} class="err"></span>
         <br>
         <input type="submit"  value="送り先情報を登録する" id="register_form">
         </form>
     <br>
-
-    <a  th:href="@{/basket/payment}">カートに戻る</a>
+    -->
+    <a  th:href="@{/customer/detail/}">お客様情報へ戻る</a>
 </body>
 </html>
 
