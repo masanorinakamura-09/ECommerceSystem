@@ -87,13 +87,33 @@ public class BasketController {
 
     @PostMapping("/determine/")
     public String Determine(@AuthenticationPrincipal CustomerDetail customerdetail
-            ,Address address,@RequestParam("id")Integer id) {
+            ,Address address,@RequestParam("id")Integer id,Model model) {
         Customer customer=customerdetail.getCustomer();
         List<Basketdetail> basketlist=basketdetailservice.getBasketList(customer.getId());
         var sum=0;
         List<Orderdetail> orderdetails=new ArrayList<Orderdetail>();
 
+        boolean stockover=false;
+        List<Merchandise> deleteList=new ArrayList<Merchandise>();
+        List<Merchandise> changedList=new ArrayList<Merchandise>();
+
         for(Basketdetail item:basketlist) {
+            var stock=merchandiseservice.getMerchandise(item.getMerchandise().getId()).getStock();
+            var merchandise=item.getMerchandise();
+
+            if(stock<=0) {
+                basketdetailservice.DeleteMerchandise(merchandise.getId(), customerdetail.getCustomer().getId());
+                stockover=true;
+                deleteList.add(merchandise);
+                continue;
+            }else if(item.getQty() > stock) {
+                item.setQty(stock);
+                basketdetailservice.saveBasketdetail(item);
+                stockover=true;
+                changedList.add(merchandise);
+                continue;
+            }
+
             Orderdetail orderdetail=new Orderdetail();
             orderdetail.setMerchandise(item.getMerchandise());
             orderdetail.setQty(item.getQty());
@@ -102,6 +122,10 @@ public class BasketController {
             orderdetails.add(orderdetail);
             orderdetailservice.saveOrder(orderdetail);
             sum+=item.getMerchandise().getPrice()*item.getQty();
+        }
+
+        if(stockover) {
+            return "redirect:/basket/detail/";
         }
 
         LocalDate date=LocalDate.now();
@@ -118,9 +142,21 @@ public class BasketController {
         orderlist.setAddress(addressservice.getAddress(id).get());
 
         orderlistservice.saveOrderList(orderlist);
+        ChangeStock(orderdetails);
         basketdetailservice.DeleteBasket(customer.getId());
 
         return "redirect:/sampleEC/home";
+    }
+
+    public void ChangeStock(List<Orderdetail> orderdetails) {
+        for(Orderdetail item:orderdetails) {
+            Merchandise merchandise=item.getMerchandise();
+            var stock=merchandiseservice.getMerchandise(merchandise.getId()).getStock();
+            var qty=item.getQty();
+
+            merchandise.setStock(stock-qty);
+            merchandiseservice.saveMerchandise(merchandise);
+        }
     }
 
     public String AddMerchandise(Customer customer,Merchandise merchandise,

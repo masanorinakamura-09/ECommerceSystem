@@ -23,15 +23,26 @@
         <td th:text="${data.category}"></td>
         <td th:text="${data.price}"></td>
 
-        <form method="post" th:action="@{/basket/add/{id}/(id=${data.id})}" onsubmit="checkText()" >
+        <div th:if="${data.stock >= 1}"><form method="post" th:action="@{/basket/add/{id}/(id=${data.id})}" onsubmit="checkText()" >
         <td><select th:name="qty">
         <option value=1>1</option>
         <option value=2>2</option>
         <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5</option>
+        <option value=6>6</option>
+        <option value=7>7</option>
+        <option value=8>8</option>
+        <option value=9>9</option>
+        <option value=10>10
+        </option>
         </select></td>
         <td><input type=submit value="カートに入れる"></td>
-        </form>
-
+        </form></div>
+        <div th:if="${data.stock <=0 }">
+        <td>在庫切れ</td>
+        <td>販売終了</td>
+        </div>
     </tr>
     </table>
 <a th:href="@{/sampleEC/food}" th:text="食品"></a>

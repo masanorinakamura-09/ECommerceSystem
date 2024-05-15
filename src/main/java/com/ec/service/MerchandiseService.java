@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import com.ec.entity.Merchandise;
 import com.ec.repository.MerchandiseRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class MerchandiseService {
     private final MerchandiseRepository merchandiseRepository;
@@ -23,5 +25,11 @@ public class MerchandiseService {
 
     public Merchandise getMerchandise(Integer id) {
         return merchandiseRepository.findById(id).get();
+    }
+
+    @Transactional
+    public void saveMerchandise(Merchandise merchandise) {
+        merchandiseRepository.save(merchandise);
+
     }
 }
