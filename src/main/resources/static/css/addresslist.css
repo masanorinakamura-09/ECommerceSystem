@@ -4,30 +4,26 @@
 
 table{
     border-collapse: collapse;
-    width:700px;
-    text-align:center;
+    width:900px;
+    text-align:left;
 }
 
-.name{
-    width:30%;
+.orderlist{
+    width:1100px;
 }
 
-.price{
-    width:15%;
+.orderdetail{
+    text-align:right;
 }
-
-.tablecategory{
-    width:20%;
-}
-
-.qty{
-    width:16%;
-}
-
 
 th,td{
     border:solid 1px black;
     padding: 10px 20px;
+}
+
+th{
+    text-align:center;
+    width:70px;
 }
 
 input{
@@ -64,16 +60,40 @@ input{
 }
 
 .maincontent{
-    width:700px;
+    width:500px;
 }
+
+
 
 .subcontent{
     flex-direction:column;
     border:1px solid black;
-    width:150px;
+    width:200px;
     height:200px;
 }
 
-.category{
+.menu{
     text-align:center;
+}
+
+
+
+.date{
+    width:15%;
+}
+
+.ordername{
+    width:20%;
+}
+
+.postcode{
+    width:5%;
+}
+
+.address{
+    width:50%;
+}
+
+.number{
+    width:6%;
 }

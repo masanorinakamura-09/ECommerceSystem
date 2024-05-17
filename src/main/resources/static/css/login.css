@@ -4,25 +4,10 @@
 
 table{
     border-collapse: collapse;
-    width:700px;
+    width:400px;
     text-align:center;
 }
 
-.name{
-    width:30%;
-}
-
-.price{
-    width:15%;
-}
-
-.tablecategory{
-    width:20%;
-}
-
-.qty{
-    width:16%;
-}
 
 
 th,td{
@@ -54,26 +39,3 @@ input{
     align-items: center;
 }
 
-.basket{
-    font-size:25px;
-    padding:20px,20px;
-}
-
-.content{
-    display:flex;
-}
-
-.maincontent{
-    width:700px;
-}
-
-.subcontent{
-    flex-direction:column;
-    border:1px solid black;
-    width:150px;
-    height:200px;
-}
-
-.category{
-    text-align:center;
-}

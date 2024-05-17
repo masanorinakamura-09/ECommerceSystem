@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+
+label{
+    background:#c8e4ff;
+    color:#000000;
+    width:300px;
+}
+
+.err{
+    color:red;
+}
+
+.selector{
+      width:900px;
+      border-bottom:5px solid #808080;
+}
+
+table{
+    border-collapse: collapse;
+    width:900px;
+    text-align:center;
+}
+
+th,td{
+    border:solid 1px black;
+    padding: 5px 5px;
+}
+
+input{
+    width:250px;
+}
+
+.radiobutton{
+    width:100px;
+}
+
+.name{
+    width:25%;
+}
+
+.postcode{
+    width:25%;
+}
+
+.address{
+    width:35%;
+}
+
+.phonenumber{
+    width:20%;
+}
+
+.register{
+    width:400px;
+    font-size:18px;
+    line-height:35px;
+
+}
+
+.head{
+    background:#c8e4ff;
+    width:400px;
+    text-align:center;
+}
+
+
+
+
+.border{
+    border-bottom:1px solid #808080;
+    margin:5px;
+    }
+
+.age{
+    width:30px;
+}
+

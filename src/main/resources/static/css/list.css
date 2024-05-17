@@ -4,30 +4,19 @@
 
 table{
     border-collapse: collapse;
-    width:700px;
+    width:400px;
     text-align:center;
 }
 
-.name{
-    width:30%;
-}
-
-.price{
-    width:15%;
-}
-
-.tablecategory{
-    width:20%;
-}
-
-.qty{
-    width:16%;
-}
 
 
 th,td{
     border:solid 1px black;
     padding: 10px 20px;
+}
+
+th{
+    width:70px;
 }
 
 input{
@@ -64,16 +53,53 @@ input{
 }
 
 .maincontent{
-    width:700px;
+    width:500px;
+}
+
+.basketmain{
+    height:100px;
+    width:900px;
+}
+
+.basketcontent{
+    text-align:right;
+}
+
+.name{
+    width:35%;
+}
+
+.category{
+    width:25%;
+}
+
+.price{
+    width:20%;
+}
+
+.qty{
+    width:10%;
+}
+.delete{
+    width:10%;
 }
 
 .subcontent{
     flex-direction:column;
     border:1px solid black;
-    width:150px;
+    width:200px;
     height:200px;
 }
 
-.category{
+.payment{
+    font-size:20px;
+    font-style: italic;
+}
+
+.button{
+    text-align:center;
+}
+
+.menu{
     text-align:center;
 }

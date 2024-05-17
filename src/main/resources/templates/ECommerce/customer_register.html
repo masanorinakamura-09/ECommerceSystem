@@ -3,66 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <title>Sample ECommerce Home</title>
-<link rel="stylesheet" th:href="@{/css/home.css}">
+<link rel="stylesheet" th:href="@{/css/register.css}">
 
 </head>
 <body>
-
-
-    <h1>お客様情報</h1>
     <form method="post" th:action="@{/sampleEC/customer_register}"  class="customer_register">
+    <div class="content">
+    <h1 class="head">お客様情報</h1>
+    <div class="maincontent">
     <div th:object="${customer}">
-    <label for="name" class="form">氏名</label>
-    <input type="text" th:field="*{name}">
-    <span th:errors=*{name} class="err"></span>
+
+    <div class="border">
+    <label for="name" class="form">氏名:</label><span th:errors=*{name} class="err"></span><br>
+    <input type="text" th:field="*{name}" placeholder="名字　名前">
     <br>
-    <label for="age" class="form">年齢</label>
-    <input type="text" th:field="*{age}">
+    </div>
+
+    <div class="border">
+    <label for="age" class="form">年齢:</label>
+    <input type="text" th:field="*{age}"　placeholder="00" class="age">
     <span th:errors=*{age} class="err"></span>
     <br>
-    <label for="gender" class="form">性別</label>
+    </div>
+
+    <div class="border">
+    <label for="gender" class="form">性別:</label>
     <select th:field="*{gender}">
     <option th:each="item:${T(com.ec.entity.Customer.Gender).values()}"
     th:value="${item}" th:text="${item}">
     </select>
     <br>
-    <label for="telephoneNumber" class="form">電話番号</label>
-    <input type="text" th:field="*{telephoneNumber}">
-    <span  th:errors=*{telephoneNumber} class="err"></span>
-    <br>
-    <label for="email" class="form">Eメールアドレス</label>
-    <input type="text" th:field="*{email}">
-    <span th:errors=*{email} class="err"></span>
-    <br>
+    </div>
 
-    <label for="loginid" class="form">ログインID</label>
-    <input type="text" th:field="*{authentication.LoginUser}">
+    <div class="border">
+    <label for="telephoneNumber" class="form">電話番号:</label><span  th:errors=*{telephoneNumber} class="err"></span>
+    <br>
+    <input type="text" th:field="*{telephoneNumber}" placeholder="01234567890" class="number">
+    <br>
+    </div>
+
+    <div class="border">
+    <label for="email" class="form">Eメールアドレス:</label><span th:errors=*{email} class="err"></span>
+    <br>
+    <input type="text" th:field="*{email}">
+    <br>
+    </div>
+
+    <div class="border">
+    <label for="loginid" class="form">ログインID:</label>
     <span th:errors=*{authentication.LoginUser} class="err"></span>
     <br>
-    <label for="password" class="form">パスワード</label>
-    <input type="password" th:field="*{authentication.password}">
+    <input type="text" th:field="*{authentication.LoginUser}">
+    <br>
+    </div>
+
+    <div class="border">
+    <label for="password" class="form">パスワード:</label>
     <span th:errors=*{authentication.password} class="err"></span>
     <br>
+    <input type="password" th:field="*{authentication.password}">
+    <br>
+    </div>
     </div>
 
     <div th:object="${address}">
-    <label for="postCode" class="form">郵便番号</label>
-    <input type="text" th:field="*{postCode}">
+    <div class="border">
+    <label for="postCode" class="form">郵便番号:</label>
     <span th:errors=*{postCode} class="err"></span>
     <br>
-    <label for="prefectural" class="form">都道府県</label>
-    <input type="text" th:field="*{prefectural}">
-        <span th:errors=*{prefectural} class="err"></span>
-
-    <br>
-    <label for="municipalities" class="form">市町村以降</label>
-    <input type="text" th:field="*{municipalities}">
-    <span th:errors=*{municipalities} class="err"></span>
+    <input type="text" th:field="*{postCode}">
     <br>
     </div>
 
+    <div class="border">
+    <label for="prefectural" class="form">都道府県:</label>
+    <span th:errors=*{prefectural} class="err"></span>
+    <br>
+    <input type="text" th:field="*{prefectural}">
+    <br>
+    </div>
+
+    <div class="border">
+    <label for="municipalities" class="form">市町村以降:</label>
+    <span th:errors=*{municipalities} class="err"></span>
+    <br>
+    <input type="text" th:field="*{municipalities}">
+    <br>
+    </div>
+    </div>
+
     <input type="submit" value="会員登録する"  class="customer_register">
+    </div>
     </form>
+<br>
 <a th:href="@{/sampleEC/home}">TOPに戻る</a>
 </body>
 </html>

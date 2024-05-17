@@ -8,19 +8,35 @@
 </head>
 <body>
 
-    <div th:replace="ECommerce/header :: header_fragment"></div>
+ <header th:replace="ECommerce/header :: header_fragment"></header>
+
 
     <h1>商品一覧</h1>
+    <div class="content">
+
+    <nav class="subcontent">
+<h3 class="category">カテゴリ</h3>
+<ul>
+<li><a th:href="@{/sampleEC/food}" th:text="食品"></a>
+<li><a th:href="@{/sampleEC/medicine}" th:text="薬剤"></a>
+<li><a th:href="@{/sampleEC/alcohol}" th:text="お酒"></a>
+<li><a th:href="@{/sampleEC/stationery}" th:text="文房具"></a>
+<li><a th:href="@{/sampleEC/electronics}" th:text="家電"></a>
+</ul>
+</nav>
+<br>
+
+    <div class="maincontent">
     <table>
     <tr>
-        <th>商品名</th>
-        <th>カテゴリ</th>
-        <th>価格</th>
-        <th>個数</th>
-        <th>カートに入れる</th>
+        <th class="name">商品名</th>
+        <th class="tablecategory">カテゴリ</th>
+        <th class="price">価格</th>
+        <th class="qty">個数</th>
+        <th class="intobasket">カートに入れる</th>
     <tr th:each="data : ${merchandiselist}">
-        <td th:text="${data.name}"></td>
-        <td th:text="${data.category}"></td>
+        <td th:text="${data.name}" ></td>
+        <td th:text="${data.category}" ></td>
         <td th:text="${data.price}"></td>
 
         <div th:if="${data.stock >= 1}"><form method="post" th:action="@{/basket/add/{id}/(id=${data.id})}" onsubmit="checkText()" >
@@ -45,16 +61,10 @@
         </div>
     </tr>
     </table>
-<a th:href="@{/sampleEC/food}" th:text="食品"></a>
-<a th:href="@{/sampleEC/medicine}" th:text="薬剤"></a>
-<a th:href="@{/sampleEC/alcohol}" th:text="お酒"></a>
-<a th:href="@{/sampleEC/stationery}" th:text="文房具"></a>
-<a th:href="@{/sampleEC/electronics}" th:text="家電"></a>
-    <br>
-<a th:href="@{/basket/detail/}">カートの中を見る</a>
-<br>
+    </div>
 
-<a th:href="@{/sampleEC/home}">TOPに戻る</a>
+</div>
+
 <script>
     function checkText(){
     window.confirm("商品をカートに入れますか？");

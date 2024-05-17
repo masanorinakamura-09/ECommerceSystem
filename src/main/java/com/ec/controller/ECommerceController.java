@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ec.entity.Address;
 import com.ec.entity.Customer;
@@ -35,23 +35,11 @@ public class ECommerceController  {
     }
 
     @GetMapping("/home")
-    public String getList(@AuthenticationPrincipal CustomerDetail customerdetail,Model model,Model customer) {
-
-        if(customerdetail==null) {
-            return getList(model);
-        }
-        model.addAttribute("merchandiselist",service.getMerchandisereList());
-        customer.addAttribute("loginuser",customerdetail.getCustomer());
-        return "ECommerce/home";
-    }
-
-
     public String getList(Model model) {
 
         model.addAttribute("merchandiselist",service.getMerchandisereList());
         return "ECommerce/home";
     }
-
 
     @GetMapping("/food")
     public String getFoodList(Model model) {
@@ -118,6 +106,14 @@ public class ECommerceController  {
         return "redirect:/sampleEC/home";
     }
 
+    @ModelAttribute("loginuser")
+    public Customer customer(@AuthenticationPrincipal CustomerDetail customerdetail) {
+        if(customerdetail!=null) {
+            return customerdetail.getCustomer();
+            }else {
+                return null;
+                }
+    }
 }
 
 

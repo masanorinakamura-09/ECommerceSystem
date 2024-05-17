@@ -3,20 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Sample ECommerce Home</title>
-<link rel="stylesheet" th:href="@{/css/home.css}">
+<link rel="stylesheet" th:href="@{/css/addressregister.css}">
 
 </head>
 <body>
-
 <h1>お送り先住所</h1>
+
+    <div class="selector">
+    <h2 class="head">登録済み住所</h2>
     <form method="post" th:action="@{/basket/selectaddress}" th:object="${data}" id="select_form">
     <table>
     <tr>
-        <th>選択</th>
-        <th>名前</th>
-        <th>郵便番号</th>
-        <th>住所</th>
-        <th>電話番号</th>
+        <th class="radiobutton">選択</th>
+        <th class="name">名前</th>
+        <th class="postcode">郵便番号</th>
+        <th class="address">住所</th>
+        <th class="phonenumber">電話番号</th>
     <tr th:each="data : ${addresslist}">
         <td>
 
@@ -32,32 +34,55 @@
 
     <input type="submit"   value="選択した住所を使用する" id="select_form">
     </form>
+    </div>
 
-    <h2>新規送り先情報を登録する</h2>
+
+    <div class="register">
+    <h2 class="head">新規送り先情報を登録する</h2>
     <form method="post" th:action="@{/basket/address}" th:object="${address}" id="register_form">
-        <label for="name" class="form">名前</label>
-        <input type="text" th:field="*{name}" >
+        <div class="border">
+        <label for="name" class="form">名前:</label>
         <span th:errors=*{name} class="err"></span>
         <br>
-        <label for="postCode" class="form">郵便番号</label>
-        <input type="text" th:field="*{postCode}">
+        <input type="text" th:field="*{name}" >
+        <br>
+        </div>
+
+        <div class="border">
+        <label for="postCode" class="form">郵便番号:</label>
         <span th:errors=*{postCode} class="err"></span>
         <br>
-        <label for="prefectual" class="form">県</label>
-        <input type="text" th:field="*{prefectural}">
+        <input type="text" th:field="*{postCode}">
+        <br>
+        </div>
+
+        <div class="border">
+        <label for="prefectual" class="form">都道府県:</label>
         <span th:errors=*{prefectural} class="err"></span>
         <br>
-        <label for="address" class="form">住所</label>
-        <input type="text" th:field="*{municipalities}">
+        <input type="text" th:field="*{prefectural}">
+        <br>
+        </div>
+
+        <div class="border">
+        <label for="address" class="form">市町村以降:</label>
         <span th:errors=*{municipalities} class="err"></span>
         <br>
-        <label for="telephonenumber" class="form">電話番号</label>
-        <input type="text" th:field="*{telephoneNumber}">
+        <input type="text" th:field="*{municipalities}">
+        <br>
+        </div>
+
+        <div class="border">
+        <label for="telephonenumber" class="form">電話番号:</label>
         <span th:errors=*{telephoneNumber} class="err"></span>
         <br>
+        <input type="text" th:field="*{telephoneNumber}">
+        <br>
+        </div>
         <input type="submit"  value="送り先情報を登録する" id="register_form">
         </form>
     <br>
+    </div>
 
     <a  th:href="@{/basket/payment}">カートに戻る</a>
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Sample ECommerce Home</title>
-<link rel="stylesheet" th:href="@{/css/home.css}">
+<link rel="stylesheet" th:href="@{/css/list.css}">
 
 </head>
 <body>
@@ -12,14 +12,16 @@
 
 
     <h1>カート内商品一覧</h1>
-    <table>
+    <div class="content">
+
+    <table class="basketmain">
     <tr>
-        <th>商品名</th>
-        <th>カテゴリ</th>
-        <th>価格</th>
-        <th>個数</th>
-        <th>削除</th>
-    <tr th:each="data : ${merchandiselist}">
+        <th class="name">商品名</th>
+        <th class="category">カテゴリ</th>
+        <th class="price">価格</th>
+        <th class="qty">個数</th>
+        <th class="delete">削除</th>
+    <tr th:each="data : ${merchandiselist}" class="basketcontent">
         <td th:text="${data.merchandise.name}"></td>
         <td th:text="${data.merchandise.category}"></td>
         <td th:text="${data.merchandise.price}"></td>
@@ -29,15 +31,21 @@
         </form>
     </tr>
     </table>
-    <br>
-    合計金額:￥<a th:text="${payment}"></a>
+
+    <div class="subcontent">
+    <a th:text="'合計金額:￥'+${payment}" class="payment"></a>
     <br>
     <div  th:if="!${#lists.isEmpty(merchandiselist)}">
-    <form method="post" th:action="@{/basket/payment}">
+    <form method="post" th:action="@{/basket/payment}" class="button">
         <input type="submit"  value="購入手続きへ">
         </form>
     <br>
     </div>
+    </div>
+
+    </div>
+    <br>
+    <br>
     <a th:href="@{/sampleEC/home}">TOPに戻る</a>
 </body>
 </html>
