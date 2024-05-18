@@ -22,8 +22,8 @@
     <tr th:each="data : ${addresslist}">
         <td>
 
-            <div th:if="${!data.priority}"><input type="radio" th:value="${data.id}" name="selectaddress" ></div>
-            <div th:if="${data.priority}"><input type="radio" th:value="${data.id}" name="selectaddress" checked></div>
+            <div th:if="${!data.priority}" ><input type="radio" th:value="${data.id}" name="selectaddress" class="radiobutton"></div>
+            <div th:if="${data.priority}" ><input type="radio" th:value="${data.id}" name="selectaddress" class="radiobutton"></div>
         </td>
         <td th:text="${data.name}"></td>
         <td th:text="${data.postCode}"></td>
@@ -32,7 +32,7 @@
     </tr>
     </table>
 
-    <input type="submit"   value="選択した住所を使用する" id="select_form">
+    <input type="submit"   value="選択した住所を使用する" id="select_form" class="submitbutton">
     </form>
     </div>
 
@@ -79,7 +79,7 @@
         <input type="text" th:field="*{telephoneNumber}">
         <br>
         </div>
-        <input type="submit"  value="送り先情報を登録する" id="register_form">
+        <input type="submit"  value="送り先情報を登録する" id="register_form" >
         </form>
     <br>
     </div>

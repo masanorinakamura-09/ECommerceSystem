@@ -8,7 +8,21 @@ table{
     text-align:center;
 }
 
+table.basketmain{
+    height:100px;
+    width:900px;
+}
 
+table.paymentlist{
+    height:100px;
+    width:900px;
+    margin:0px 10px 100px 0px;
+}
+
+table.addresslist{
+    height:100px;
+    width:500px;
+}
 
 th,td{
     border:solid 1px black;
@@ -56,8 +70,9 @@ input{
     width:500px;
 }
 
-.basketmain{
-    height:100px;
+
+
+.paymentmain{
     width:900px;
 }
 

@@ -12,50 +12,20 @@ label{
 }
 
 .selector{
-      width:900px;
+      width:1000px;
       border-bottom:5px solid #808080;
+      margin: 5px 0px 5px;
 }
 
 table{
     border-collapse: collapse;
-    width:900px;
+    width:1000px;
     text-align:center;
 }
 
 th,td{
     border:solid 1px black;
     padding: 5px 5px;
-}
-
-input{
-    width:250px;
-}
-
-.radiobutton{
-    width:100px;
-}
-
-.name{
-    width:25%;
-}
-
-.postcode{
-    width:25%;
-}
-
-.address{
-    width:35%;
-}
-
-.phonenumber{
-    width:20%;
-}
-
-.register{
-    width:400px;
-    font-size:18px;
-    line-height:35px;
-
 }
 
 .head{
@@ -65,14 +35,44 @@ input{
 }
 
 
+input{
+    width:250px;
+}
 
+.radiobutton{
+    width:40px;
+}
+
+.name{
+    width:20%;
+}
+
+.postcode{
+    width:15%;
+}
+
+.address{
+    width:45%;
+}
+
+.phonenumber{
+    width:20%;
+}
+
+.submitbutton{
+    margin:10px 0px 30px;
+}
+
+.register{
+    width:400px;
+    font-size:18px;
+    line-height:35px;
+
+}
 
 .border{
     border-bottom:1px solid #808080;
     margin:5px;
     }
 
-.age{
-    width:30px;
-}
 

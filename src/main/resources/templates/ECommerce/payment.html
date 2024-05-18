@@ -7,27 +7,30 @@
 
 </head>
 <body>
-
     <h1>カート内商品一覧</h1>
-    <table>
-    <tr>
-        <th>商品名</th>
-        <th>カテゴリ</th>
-        <th>価格</th>
-        <th>個数</th>
 
-    <tr th:each="data : ${merchandiselist}">
+    <div class="content">
+    <div class="paymentmain">
+
+    <table class="paymentlist">
+    <tr>
+        <th class="name">商品名</th>
+        <th class="category">カテゴリ</th>
+        <th class="price">価格</th>
+        <th class="qty">個数</th>
+
+    <tr th:each="data : ${merchandiselist}" class="basketcontent">
         <td th:text="${data.merchandise.name}"></td>
         <td th:text="${data.merchandise.category}"></td>
         <td th:text="${data.merchandise.price}"></td>
         <td th:text="${data.qty}"></td>
 
     </tr>
-    </table>
+    </table >
     <br>
     <h3>送り先住所</h3>
 
-    <table>
+    <table class="addresslist">
         <tr>
         <th>氏名</th>
         <td th:text="${useraddress.name}"></td>
@@ -49,6 +52,8 @@
         </tr>
         </table>
     <br>
+    </div>
+    <div class="subcontent">
     合計金額:￥<a th:text="${payment}"></a>
     <br>
     <br>
@@ -56,10 +61,12 @@
     <br>
     <br>
     <a th:href="@{/basket/address}" >送り先情報を変更する</a>
+    <br>
+    <br>
     <div  th:if="${payment} <= ${loginuser.cash}">
-    <form method="post" th:action="@{/basket/determine/}" >
+    <form method="post" th:action="@{/basket/determine/}"  class="button">
         <input type="hidden" th:value="${useraddress.id}" th:name="id">
-        <input type="submit"  value="注文を確定する">
+        <input type="submit"  value="注文を確定する" >
         </form>
     <br>
     </div>
@@ -67,8 +74,11 @@
     <a th:text="ウォレットの残高が不足してます"></a>
     <br>
     </div>
-    <a  th:href="@{/basket/detail/}">カートに戻る</a>
     </div>
+
+    </div>
+
+    <a  th:href="@{/basket/detail/}">カートに戻る</a>
 </body>
 </html>
 
