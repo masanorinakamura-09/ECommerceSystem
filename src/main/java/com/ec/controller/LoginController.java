@@ -10,4 +10,9 @@ public class LoginController {
     public String getLogin(){
         return "login";
     }
+
+    @GetMapping("/")
+    public String getHome() {
+        return "ECommerce/home";
+    }
 }

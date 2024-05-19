@@ -23,7 +23,7 @@
         <td>
 
             <div th:if="${!data.priority}" ><input type="radio" th:value="${data.id}" name="selectaddress" class="radiobutton"></div>
-            <div th:if="${data.priority}" ><input type="radio" th:value="${data.id}" name="selectaddress" class="radiobutton"></div>
+            <div th:if="${data.priority}" ><input type="radio" th:value="${data.id}" name="selectaddress" class="radiobutton" checked></div>
         </td>
         <td th:text="${data.name}"></td>
         <td th:text="${data.postCode}"></td>

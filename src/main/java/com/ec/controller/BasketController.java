@@ -205,6 +205,7 @@ public class BasketController {
         addressservice.saveAddress(address);
         }
 
+        model.addAttribute("useraddress",address);
         return "ECommerce/payment";
     }
 

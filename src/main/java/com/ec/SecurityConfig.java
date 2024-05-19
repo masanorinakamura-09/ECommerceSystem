@@ -16,8 +16,7 @@ public class SecurityConfig {
                 .loginProcessingUrl("/login")
                 .loginPage("/login")
                 .defaultSuccessUrl("/sampleEC/home")
-                .failureUrl("/login?error")
-                .permitAll()
+                .failureUrl("/login?error").permitAll()
                 ).logout(logout -> logout
                         .logoutSuccessUrl("/sampleEC/home")
 
@@ -25,6 +24,7 @@ public class SecurityConfig {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                         .permitAll()
                         .requestMatchers("/sampleEC/**").permitAll()
+                        .requestMatchers("/error/**").permitAll()
                         .anyRequest().authenticated()
                         );
 
