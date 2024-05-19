@@ -12,6 +12,8 @@
 
 
     <h1>カート内商品一覧</h1>
+    <div th:if="${stockerror}==true" class="err"><h3>在庫が無くなったため販売不可の商品をカートから削除しました。注文は確定されてません。</h3></div>
+    <div th:if="${qtyerror}==true" class="err"><h3>購入数が在庫数を上回る商品があるため、最大購入可能数に変更しました。注文は確定されてません。</h3></div>
     <div class="content">
 
     <table class="basketmain">

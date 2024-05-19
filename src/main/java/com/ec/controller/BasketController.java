@@ -41,6 +41,10 @@ public class BasketController {
     private final OrderlistService orderlistservice;
     private final AddressService addressservice;
 
+    private boolean registeredError=false;
+    private boolean stockError=false;
+    private boolean qtyError=false;
+
     public BasketController(BasketdetailService basketdetailservice,
             MerchandiseService merchandiseservice,
             CustomerService customerservice,
@@ -55,7 +59,15 @@ public class BasketController {
 
 
     @GetMapping("/detail/")
-    public String getBasket() {
+    public String getBasket(Model model) {
+        if(stockError) {
+            model.addAttribute("stockerror",true);
+            stockError=false;
+        }
+        if(qtyError) {
+            model.addAttribute("qtyerror",true);
+            qtyError=false;
+        }
         return "ECommerce/basket";
     }
 
@@ -93,7 +105,6 @@ public class BasketController {
         var sum=0;
         List<Orderdetail> orderdetails=new ArrayList<Orderdetail>();
 
-        boolean stockover=false;
         List<Merchandise> deleteList=new ArrayList<Merchandise>();
         List<Merchandise> changedList=new ArrayList<Merchandise>();
 
@@ -103,13 +114,13 @@ public class BasketController {
 
             if(stock<=0) {
                 basketdetailservice.DeleteMerchandise(merchandise.getId(), customerdetail.getCustomer().getId());
-                stockover=true;
+                stockError=true;
                 deleteList.add(merchandise);
                 continue;
             }else if(item.getQty() > stock) {
                 item.setQty(stock);
                 basketdetailservice.saveBasketdetail(item);
-                stockover=true;
+                qtyError=true;
                 changedList.add(merchandise);
                 continue;
             }
@@ -124,7 +135,7 @@ public class BasketController {
             sum+=item.getMerchandise().getPrice()*item.getQty();
         }
 
-        if(stockover) {
+        if(stockError || qtyError) {
             return "redirect:/basket/detail/";
         }
 
@@ -185,8 +196,13 @@ public class BasketController {
     public String GetAddress(Model model,Address address,@AuthenticationPrincipal CustomerDetail customerdetail) {
         List<Address> addressList=addressservice.getAddressList(customerdetail.getCustomer().getId());
 
+
         model.addAttribute("address", address);
         model.addAttribute("addresslist", addressList);
+        if(registeredError) {
+            model.addAttribute("registerederror",true);
+        }
+        registeredError=false;
         return "ECommerce/addressregister";
     }
 
@@ -203,6 +219,9 @@ public class BasketController {
         if(!(addressservice.existsAddress(customerdetail.getCustomer().getId()
                 , address.getPostCode()))){
         addressservice.saveAddress(address);
+        }else {
+            registeredError=true;
+            return GetAddress(model,address,customerdetail);
         }
 
         model.addAttribute("useraddress",address);

@@ -39,6 +39,7 @@
 
     <div class="register">
     <h2 class="head">新規送り先情報を登録する</h2>
+    <div th:if="${registerederror} == true" class="err">既に同じ郵便番号が登録済みです</div>
     <form method="post" th:action="@{/basket/address}" th:object="${address}" id="register_form">
         <div class="border">
         <label for="name" class="form">名前:</label>
@@ -84,7 +85,6 @@
     <br>
     </div>
 
-    <a  th:href="@{/basket/payment}">カートに戻る</a>
 </body>
 </html>
 

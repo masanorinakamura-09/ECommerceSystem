@@ -53,9 +53,9 @@ public class ECommerceController  {
         return "ECommerce/home";
     }
 
-    @GetMapping("/alcohol")
+    @GetMapping("/furniture")
     public String getAlcoholList(Model model) {
-        model.addAttribute("merchandiselist",service.getCategoryList("お酒"));
+        model.addAttribute("merchandiselist",service.getCategoryList("家具"));
         return "ECommerce/home";
     }
 

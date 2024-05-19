@@ -64,14 +64,14 @@
     <br>
     <br>
     <div  th:if="${payment} <= ${loginuser.cash}">
-    <form method="post" th:action="@{/basket/determine/}"  class="button">
+    <form method="post" th:action="@{/basket/determine/}"  class="button" onsubmit="checkText()">
         <input type="hidden" th:value="${useraddress.id}" th:name="id">
         <input type="submit"  value="注文を確定する" >
         </form>
     <br>
     </div>
     <div  th:unless="${payment} <= ${loginuser.cash}">
-    <a th:text="ウォレットの残高が不足してます"></a>
+    <a th:text="ウォレットの残高が不足してます"　class="err"></a>
     <br>
     </div>
     </div>
@@ -79,6 +79,12 @@
     </div>
 
     <a  th:href="@{/basket/detail/}">カートに戻る</a>
+
+    <script>
+    function checkText(){
+    window.confirm("注文を確定します");
+    }
+    </script>
 </body>
 </html>
 
