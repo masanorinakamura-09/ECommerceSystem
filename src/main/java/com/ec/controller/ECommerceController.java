@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ec.entity.Address;
+import com.ec.entity.Basketdetail;
 import com.ec.entity.Customer;
 import com.ec.service.AddressService;
+import com.ec.service.BasketdetailService;
 import com.ec.service.CustomerDetail;
 import com.ec.service.CustomerService;
 import com.ec.service.MerchandiseService;
@@ -24,14 +26,16 @@ public class ECommerceController  {
     private final MerchandiseService service;
     private final CustomerService customerservice;
     private final AddressService addressservice;
+    private final BasketdetailService basketdetailservice;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public ECommerceController(MerchandiseService service, CustomerService customerservice, AddressService addressservice) {
+    public ECommerceController(MerchandiseService service, CustomerService customerservice, AddressService addressservice, BasketdetailService basketdetailservice) {
         this.service = service;
         this.customerservice = customerservice;
         this.addressservice = addressservice;
+        this.basketdetailservice = basketdetailservice;
     }
 
     @GetMapping("/home")
@@ -113,6 +117,20 @@ public class ECommerceController  {
             }else {
                 return null;
                 }
+    }
+
+    @ModelAttribute("basketitems")
+    public Integer getBasketItems(@AuthenticationPrincipal CustomerDetail customerdetail){
+        if(customerdetail!=null) {
+            var basketlist=basketdetailservice.getBasketList(customerdetail.getCustomer().getId());
+            var sum=0;
+            for(Basketdetail item : basketlist) {
+                    sum+=item.getQty();
+            }
+            return sum;
+            }else {
+                return null;
+            }
     }
 }
 

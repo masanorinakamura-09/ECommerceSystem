@@ -11,7 +11,6 @@ public class TomcatConfiguration implements WebServerFactoryCustomizer<TomcatSer
 
     @Override
     public void customize(TomcatServletWebServerFactory factory) {
-        // TODO 自動生成されたメソッド・スタブ
         factory.addAdditionalTomcatConnectors(ajpConnector());
     }
 

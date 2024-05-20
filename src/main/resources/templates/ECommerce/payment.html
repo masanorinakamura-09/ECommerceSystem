@@ -22,7 +22,7 @@
     <tr th:each="data : ${merchandiselist}" class="basketcontent">
         <td th:text="${data.merchandise.name}"></td>
         <td th:text="${data.merchandise.category}"></td>
-        <td th:text="${data.merchandise.price}"></td>
+        <td th:text="${'¥'+data.merchandise.price}"></td>
         <td th:text="${data.qty}"></td>
 
     </tr>

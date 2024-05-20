@@ -26,7 +26,7 @@
     <tr th:each="data : ${merchandiselist}" class="basketcontent">
         <td th:text="${data.merchandise.name}"></td>
         <td th:text="${data.merchandise.category}"></td>
-        <td th:text="${data.merchandise.price}"></td>
+        <td th:text="${'¥'+data.merchandise.price}"></td>
         <td th:text="${data.qty}"></td>
         <form method="post" th:action="@{/basket/delete/{id}/(id=${data.merchandise.id})}">
         <td><input type="submit" value="カートから削除する"></td>

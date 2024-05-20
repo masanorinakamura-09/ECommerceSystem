@@ -37,9 +37,9 @@
     <tr th:each="data : ${merchandiselist}">
         <td th:text="${data.name}" ></td>
         <td th:text="${data.category}" ></td>
-        <td th:text="${data.price}"></td>
+        <td th:text="'¥'+${data.price}"></td>
 
-        <div th:if="${data.stock >= 1}"><form method="post" th:action="@{/basket/add/{id}/(id=${data.id})}" onsubmit="checkText()" >
+        <div th:if="${data.stock >= 1}"><form method="post" th:action="@{/basket/add/{id}/(id=${data.id})}"  >
         <td><select th:name="qty">
         <option value=1>1</option>
         <option value=2>2</option>
@@ -62,13 +62,12 @@
     </tr>
     </table>
     </div>
-
+    <div  th:if="${loginuser != null}" class="basket">
+    <a th:href="@{/basket/detail/}" >カートの中を見る</a>
+    <br>
+    <p>カート内の個数:<span th:text="${basketitems}" class="basketitem"></span></p>
+    </div>
 </div>
-
-<script>
-    function checkText(){
-    window.confirm("商品をカートに入れますか？");
-    }
 
 </script>
 </body>

@@ -54,10 +54,7 @@ input{
     align-items: center;
 }
 
-.basket{
-    font-size:25px;
-    padding:20px,20px;
-}
+
 
 .content{
     display:flex;
@@ -72,6 +69,20 @@ input{
     border:1px solid black;
     width:150px;
     height:200px;
+}
+
+.basket{
+    font-size:20px;
+    padding:20px,20px;
+    align-items: center;
+    border:1px solid black;
+     width:200px;
+    height:200px;
+}
+
+.basketitem{
+     font-size:25px;
+     color:#ff8040;
 }
 
 .category{

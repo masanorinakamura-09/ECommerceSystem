@@ -9,7 +9,6 @@
     <li th:if="${loginuser != null}"><form method="post" th:action="@{/logout}">
     <input type="submit" value="ログアウト">
     </form>
-    <li th:if="${loginuser != null}"><a th:href="@{/basket/detail/}" class="basket">カートの中を見る</a>
     <li th:if="${loginuser == null}"><a th:href="@{/login}" th:text="ログイン"></a>
     <li th:if="${loginuser == null}"><a th:href="@{/sampleEC/customer_register}" th:text="新規会員登録" ></a>
     </ul>
