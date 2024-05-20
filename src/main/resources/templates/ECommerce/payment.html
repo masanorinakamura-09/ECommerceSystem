@@ -64,7 +64,7 @@
     <br>
     <br>
     <div  th:if="${payment} <= ${loginuser.cash}">
-    <form method="post" th:action="@{/basket/determine/}"  class="button" onsubmit="checkText()">
+    <form method="post" th:action="@{/basket/determine/}"  class="button" >
         <input type="hidden" th:value="${useraddress.id}" th:name="id">
         <input type="submit"  value="注文を確定する" >
         </form>
@@ -80,11 +80,6 @@
 
     <a  th:href="@{/basket/detail/}">カートに戻る</a>
 
-    <script>
-    function checkText(){
-    window.confirm("注文を確定します");
-    }
-    </script>
 </body>
 </html>
 

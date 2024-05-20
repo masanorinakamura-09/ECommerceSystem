@@ -22,7 +22,7 @@ public class OrderlistService {
         }
 
         public List<Orderlist> getOrderList(Integer customerid) {
-            return orderlistrepository.findByCustomerId(customerid);
+            return orderlistrepository.findByCustomerIdOrderByDateDescIdAsc(customerid);
         }
 
         public Optional<Orderlist> getOrderDetailList(Integer id) {

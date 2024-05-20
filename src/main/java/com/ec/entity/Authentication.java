@@ -1,5 +1,7 @@
 package com.ec.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -16,9 +18,11 @@ public class Authentication {
 
     @Id
     @NotBlank
+    @Length(min=5,message= "{autherr}")
     private String LoginUser;
 
     @NotBlank
+    @Length(min=5,message= "{autherr}")
     private String password;
 
     @OneToOne

@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.ec.entity.Orderlist;
 
 public interface OrderlistRepository extends JpaRepository<Orderlist, Integer> {
-     List<Orderlist> findByCustomerId(Integer customerId);
+     List<Orderlist> findByCustomerIdOrderByDateDescIdAsc(Integer customerId);
 }
