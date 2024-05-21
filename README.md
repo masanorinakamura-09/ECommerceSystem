@@ -4,18 +4,18 @@ WEB通販サイトを模したシステムです。
 # DEMO
 # Features
 
-###商品購入機能
-商品を購入、注文リストと注文明細の確認ができます。
+### 商品購入機能
+商品を購入、注文リストと注文明細の確認ができます。<br>
 <br>
 ![ECommerceSample1](https://github.com/masanorinakamura-09/ECommerceSystem/assets/123363437/1e423f2f-1ebd-4c89-9532-b63fece5ac82)
 
-###在庫チェック機能
-商品購入時に在庫チェックを行い売り越しがないように出来ます。
+### 在庫チェック機能
+商品購入時に在庫チェックを行い売り越しがないように出来ます。<br>
 <br>
 ![ECommerceSample2](https://github.com/masanorinakamura-09/ECommerceSystem/assets/123363437/d7384a04-3357-4c87-8d25-8c86f910b339)
 
-###送り先住所管理機能
-送り先を注文毎に設定する事が出来ます。一度使用した住所は保存されるため次のお買い物から再入力することなく使用できます。
+### 送り先住所管理機能
+送り先を注文毎に設定する事が出来ます。一度使用した住所は保存されるため次のお買い物から再入力することなく使用できます。<br>
 <br>
 ![ECommerceSample3](https://github.com/masanorinakamura-09/ECommerceSystem/assets/123363437/ac0198af-2ad6-4eea-bb15-661ca528fce9)
 
